@@ -1,12 +1,32 @@
 source $VIM/_vimrc
 
+
 set number
 set relativenumber
 
+set directory=F:/Temp/Vim//
+set backupdir=F:/Temp/Vim//
+set undodir=F:/Temp/Vim//
+
+
 call plug#begin('~/vimfiles/vim-plug')
+
 
 Plug 'scrooloose/nerdtree'
 Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-surround'
+Plug 'scrooloose/syntastic'
 
-PlugInstall --sync | q
+
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+
+
+PlugInstall --sync "| q
 call plug#end()
