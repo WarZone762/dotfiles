@@ -44,6 +44,7 @@ endfunction
 " Settings
 set number
 set relativenumber
+set t_Co=256
 
 set directory=F:/Temp/Vim//
 set backupdir=F:/Temp/Vim//
@@ -54,12 +55,14 @@ set undodir=F:/Temp/Vim//
 call plug#begin('~/vimfiles/vim-plug')
 
 
-Plug 'scrooloose/nerdtree'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
+Plug 'scrooloose/nerdtree'
 Plug 'scrooloose/syntastic'
 Plug 'airblade/vim-gitgutter'
 Plug 'vim-airline/vim-airline'
+Plug 'scrooloose/nerdcommenter'
+Plug 'majutsushi/tagbar'
 
 
 PlugInstall --sync "| q
