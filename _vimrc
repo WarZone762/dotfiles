@@ -63,6 +63,7 @@ Plug 'airblade/vim-gitgutter'
 Plug 'vim-airline/vim-airline'
 Plug 'scrooloose/nerdcommenter'
 Plug 'majutsushi/tagbar'
+Plug 'valloric/youcompleteme'
 
 
 PlugInstall --sync "| q
