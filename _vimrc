@@ -16,6 +16,12 @@ Plug 'scrooloose/nerdtree'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
 Plug 'scrooloose/syntastic'
+Plug 'airblade/vim-gitgutter'
+Plug 'vim-airline/vim-airline'
+
+
+PlugInstall --sync "| q
+call plug#end()
 
 
 set statusline+=%#warningmsg#
@@ -28,5 +34,3 @@ let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 
 
-PlugInstall --sync "| q
-call plug#end()
