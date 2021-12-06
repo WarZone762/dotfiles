@@ -58,12 +58,14 @@ call plug#begin('~/vimfiles/vim-plug')
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
 Plug 'scrooloose/nerdtree'
-Plug 'scrooloose/syntastic'
+" Plug 'scrooloose/syntastic'
 Plug 'airblade/vim-gitgutter'
 Plug 'vim-airline/vim-airline'
 Plug 'scrooloose/nerdcommenter'
 Plug 'majutsushi/tagbar'
 Plug 'valloric/youcompleteme'
+Plug 'tpope/vim-repeat'
+" Plug 'w0rp/ale'
 
 
 PlugInstall --sync "| q
