@@ -67,19 +67,41 @@ Plug 'valloric/youcompleteme'
 Plug 'tpope/vim-repeat'
 " Plug 'w0rp/ale'
 
+Plug 'yggdroot/indentline'
+Plug 'easymotion/vim-easymotion'
+Plug 'mg979/vim-visual-multi'
+Plug 'luochen1990/rainbow'
+Plug 'tpope/vim-eunuch'
+Plug 'editorconfig/editorconfig-vim'
+Plug 'tpope/vim-abolish'
+Plug 'raimondi/delimitmate'
+Plug 'kkoomen/vim-doge'
+Plug 'terryma/vim-expand-region'
+Plug 'sjl/gundo.vim'
+Plug 'godlygeek/tabular'
+Plug 'wellle/targets.vim'
+Plug 'kana/vim-textobj-user'
+Plug 'kana/vim-textobj-line'
+Plug 'michaeljsmith/vim-indent-object'
+Plug 'kana/vim-textobj-entire'
+Plug 'tpope/vim-unimpaired'
+Plug 'tpope/vim-vinegar'
+Plug 'tpope/vim-sensible'
 
-PlugInstall --sync "| q
+
 call plug#end()
 
 
 " Plugin Settings
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
+let g:rainbow_active = 1
 
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
+" set statusline+=%#warningmsg#
+" set statusline+=%{SyntasticStatuslineFlag()}
+" set statusline+=%*
+" 
+" let g:syntastic_always_populate_loc_list = 1
+" let g:syntastic_auto_loc_list = 1
+" let g:syntastic_check_on_open = 1
+" let g:syntastic_check_on_wq = 0
 
 
