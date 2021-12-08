@@ -33,8 +33,10 @@ return require("packer").startup(function()
 	use "tpope/vim-unimpaired"
 	use "tpope/vim-vinegar"
 	use "tpope/vim-sensible"
-	
-	use {"ms-jpq/coq_nvim", branch = "coq", requires = {"ms-jpq/coq.artifacts", branch = "artifacts"}, run = ":COQdeps", config = ":COQnow"}
+		
+	use {"ms-jpq/coq_nvim", branch = "coq", requires = {"ms-jpq/coq.artifacts", branch = "artifacts"}, run = ":autocmd VimEnter * COQdeps", config = vim.api.nvim_command("autocmd VimEnter * COQnow")
+}
 
 
 end)
+
