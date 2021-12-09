@@ -5,8 +5,8 @@ return require("packer").startup(function()
 	use "tpope/vim-surround"
 	use {"scrooloose/nerdtree", disable = true}
 	use {"scrooloose/syntastic", disable = true}
-	use "airblade/vim-gitgutter"
-	use "vim-airline/vim-airline"
+	use {"airblade/vim-gitgutter", disable = true}
+	use {"vim-airline/vim-airline", disable = true}
 	use "scrooloose/nerdcommenter"
 	use "majutsushi/tagbar"
 	-- use "valloric/youcompleteme', {'do': 'install.py --msvc 17 --cmake-path \"C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe\"'"
@@ -38,6 +38,8 @@ return require("packer").startup(function()
 	use {"nvim-telescope/telescope.nvim", requires = {"nvim-lua/plenary.nvim"}}
 	use {"liuchengxu/vista.vim"}
 	use {"ms-jpq/chadtree", branch = "chad", run = {"python -m chadtree deps", ":CHADdeps"}}
+	use {"nvim-lualine/lualine.nvim", config = require("lualine").setup()}
+	use {"TimUntersberger/neogit", requires = "nvim-lua/plenary.nvim"}
 
 end)
 
