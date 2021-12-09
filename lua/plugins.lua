@@ -3,7 +3,7 @@ return require("packer").startup(function()
 
 	use "tpope/vim-fugitive"
 	use "tpope/vim-surround"
-	use "scrooloose/nerdtree"
+	use {"scrooloose/nerdtree", disable = true}
 	use {"scrooloose/syntastic", disable = true}
 	use "airblade/vim-gitgutter"
 	use "vim-airline/vim-airline"
@@ -11,7 +11,7 @@ return require("packer").startup(function()
 	use "majutsushi/tagbar"
 	-- use "valloric/youcompleteme', {'do': 'install.py --msvc 17 --cmake-path \"C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe\"'"
 	use "tpope/vim-repeat"
-	use {"w0rp/ale", disble = true}
+	use {"w0rp/ale", disable = true}
 	
 	use "yggdroot/indentline"
 	use "easymotion/vim-easymotion"
@@ -34,8 +34,10 @@ return require("packer").startup(function()
 	use "tpope/vim-vinegar"
 	use "tpope/vim-sensible"
 		
-	use {"ms-jpq/coq_nvim", branch = "coq", requires = {"ms-jpq/coq.artifacts", branch = "artifacts"}, run = ":autocmd VimEnter * COQdeps", config = vim.api.nvim_command("autocmd VimEnter * COQnow")}
+	use {"ms-jpq/coq_nvim", branch = "coq", requires = {"ms-jpq/coq.artifacts", branch = "artifacts"}, run = ":COQdeps", config = vim.api.nvim_command("autocmd VimEnter * COQnow")}
 	use {"nvim-telescope/telescope.nvim", requires = {"nvim-lua/plenary.nvim"}}
+	use {"liuchengxu/vista.vim"}
+	use {"ms-jpq/chadtree", branch = "chad", run = {"python -m chadtree deps", ":CHADdeps"}}
 
 end)
 
