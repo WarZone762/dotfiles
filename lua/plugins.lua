@@ -9,6 +9,7 @@ return require("packer").startup(function()
 	use {"vim-airline/vim-airline", disable = true}
 	use {"w0rp/ale", disable = true}
 	use {"valloric/youcompleteme", run = "install.py --msvc 17 --cmake-path \"C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/bin/cmake.exe\"", disable = true}
+	use {"yggdroot/indentline", disable = true}
 
 	-- Vim
 	use "tpope/vim-fugitive"
@@ -17,7 +18,6 @@ return require("packer").startup(function()
 	use "majutsushi/tagbar"
 	use "tpope/vim-repeat"
 	
-	use "yggdroot/indentline"
 	use "easymotion/vim-easymotion"
 	use "mg979/vim-visual-multi"
 	use "luochen1990/rainbow"
@@ -43,9 +43,11 @@ return require("packer").startup(function()
 	use {"nvim-telescope/telescope.nvim", requires = {"nvim-lua/plenary.nvim"}}
 	use {"liuchengxu/vista.vim"}
 	use {"ms-jpq/chadtree", branch = "chad", run = {"python -m chadtree deps", ":CHADdeps"}}
-	use {"nvim-lualine/lualine.nvim", config = require("lualine").setup()}
+	use {"nvim-lualine/lualine.nvim", config = function() require("lualine").setup() end}
 	use {"TimUntersberger/neogit", requires = "nvim-lua/plenary.nvim"}
-	use {"lewis6991/gitsigns.nvim", requires = "nvim-lua/plenary.nvim", config = require("gitsigns").setup()}
+	use {"lewis6991/gitsigns.nvim", requires = "nvim-lua/plenary.nvim", config = function() require("gitsigns").setup() end}
+	use {"lukas-reineke/indent-blankline.nvim", config = function() require("indent_blankline").setup() end}
+	use {"norcalli/nvim-colorizer.lua", config = function() require("colorizer").setup() end}
 
 end)
 

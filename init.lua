@@ -3,6 +3,7 @@ local opt = vim.opt
 opt.number = true
 opt.relativenumber = true
 -- opt.t_Co = 256
+opt.termguicolors = true
 
 opt.directory = "F:/Temp/Neovim//"
 opt.backupdir = "F:/Temp/Neovim//"
