@@ -8,4 +8,4 @@ opt.directory = "F:/Temp/Neovim//"
 opt.backupdir = "F:/Temp/Neovim//"
 opt.undodir = "F:/Temp/Neovim//"
 
-require("plugins")
+require("./plugins")

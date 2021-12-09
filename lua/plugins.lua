@@ -34,9 +34,8 @@ return require("packer").startup(function()
 	use "tpope/vim-vinegar"
 	use "tpope/vim-sensible"
 		
-	use {"ms-jpq/coq_nvim", branch = "coq", requires = {"ms-jpq/coq.artifacts", branch = "artifacts"}, run = ":autocmd VimEnter * COQdeps", config = vim.api.nvim_command("autocmd VimEnter * COQnow")
-}
-
+	use {"ms-jpq/coq_nvim", branch = "coq", requires = {"ms-jpq/coq.artifacts", branch = "artifacts"}, run = ":autocmd VimEnter * COQdeps", config = vim.api.nvim_command("autocmd VimEnter * COQnow")}
+	use {"nvim-telescope/telescope.nvim", requires = {"nvim-lua/plenary.nvim"}}
 
 end)
 
