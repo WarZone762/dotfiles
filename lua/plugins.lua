@@ -39,15 +39,52 @@ return require("packer").startup(function()
 	use "tpope/vim-sensible"
 		
 	-- Neovim
-	use {"ms-jpq/coq_nvim", branch = "coq", requires = {"ms-jpq/coq.artifacts", branch = "artifacts"}, run = ":COQdeps", config = vim.api.nvim_command("autocmd VimEnter * COQnow")}
-	use {"nvim-telescope/telescope.nvim", requires = {"nvim-lua/plenary.nvim"}}
-	use {"liuchengxu/vista.vim"}
-	use {"ms-jpq/chadtree", branch = "chad", run = {"python -m chadtree deps", ":CHADdeps"}}
-	use {"nvim-lualine/lualine.nvim", config = function() require("lualine").setup() end}
-	use {"TimUntersberger/neogit", requires = "nvim-lua/plenary.nvim"}
-	use {"lewis6991/gitsigns.nvim", requires = "nvim-lua/plenary.nvim", config = function() require("gitsigns").setup() end}
-	use {"lukas-reineke/indent-blankline.nvim", config = function() require("indent_blankline").setup() end}
-	use {"norcalli/nvim-colorizer.lua", config = function() require("colorizer").setup() end}
+	use {
+		"ms-jpq/coq_nvim",
+		branch = "coq",
+		requires = {
+			"ms-jpq/coq.artifacts",
+			branch = "artifacts"
+		},
+		run = ":COQdeps",
+		config = function() vim.api.nvim_command("COQnow") end
+	}
+	use {
+		"nvim-telescope/telescope.nvim",
+		requires = {"nvim-lua/plenary.nvim"}
+	}
+	use {
+		"liuchengxu/vista.vim"
+	}
+	use {
+		"ms-jpq/chadtree",
+		branch = "chad",
+		run = {
+			"python3 -m chadtree deps",
+			":CHADdeps"
+		}
+	}
+	use {
+		"nvim-lualine/lualine.nvim",
+		config = function() require("lualine").setup() end
+	}
+	use {
+		"TimUntersberger/neogit",
+		requires = {"nvim-lua/plenary.nvim"}
+	}
+	use {
+		"lewis6991/gitsigns.nvim",
+		requires = {"nvim-lua/plenary.nvim"},
+		config = function() require("gitsigns").setup() end
+	}
+	use {
+		"lukas-reineke/indent-blankline.nvim",
+		config = function() require("indent_blankline").setup() end
+	}
+	use {
+		"norcalli/nvim-colorizer.lua",
+		config = function() require("colorizer").setup() end
+	}
 
 end)
 
