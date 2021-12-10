@@ -47,7 +47,7 @@ return require("packer").startup(function()
 			branch = "artifacts"
 		},
 		run = ":COQdeps",
-		config = function() vim.api.nvim_command("COQnow") end
+		config = function() vim.defer_fn(function() vim.api.nvim_command("COQnow") end, 1000) end
 	}
 	use {
 		"nvim-telescope/telescope.nvim",

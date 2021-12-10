@@ -1,12 +1,19 @@
-local opt = vim.opt
+local set = vim.opt
 
-opt.number = true
-opt.relativenumber = true
--- opt.t_Co = 256
-opt.termguicolors = true
+set.number = true
+set.relativenumber = true
+-- set.t_Co = 256
+set.termguicolors = true
 
-opt.directory = "F:/Temp/Neovim//"
-opt.backupdir = "F:/Temp/Neovim//"
-opt.undodir = "F:/Temp/Neovim//"
+set.directory = "F:/Temp/Neovim//"
+set.backupdir = "F:/Temp/Neovim//"
+set.undodir = "F:/Temp/Neovim//"
+
+if string.find(vim.env.ComSpec, "cmd.exe") then
+	set.shell = "powershell"
+	set.shellcmdflag = "-Command"
+	set.shellquote = ""
+	set.shellxquote = ""
+end
 
 require("./plugins")
