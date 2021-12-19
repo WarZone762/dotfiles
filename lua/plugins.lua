@@ -57,14 +57,16 @@ return require("packer").startup(function(use)
 	use {
 		"neovim/nvim-lspconfig",
 		config = function()
-			--require("lspconfig").pyright.setup();
-			require("lspconfig").sumneko_lua.setup({cmd = {"lua-language-server.bat"}})
+			local lspconfig = require("lspconfig")
+			lspconfig.pyright.setup({})
+			lspconfig.sumneko_lua.setup({cmd = {"cmd.exe", "/C","lua-language-server"}})
 		end
 	}
 	use {
 		"nvim-treesitter/nvim-treesitter",
 		config = function() require("nvim-treesitter.configs").setup({
 			ensure_installed = "maintained",
+			highlight = {enable = true}
 		}) end,
 		run = ":TSUpdate"
 	}
