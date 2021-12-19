@@ -1,4 +1,4 @@
-return require("packer").startup(function()
+return require("packer").startup(function(use)
 	-- Packer
 	use {"wbthomason/packer.nvim"}
 
@@ -32,7 +32,7 @@ return require("packer").startup(function()
 	use {"scrooloose/nerdcommenter"}
 	use {"majutsushi/tagbar"}
 	use {"tpope/vim-repeat"}
-	
+
 	use {"easymotion/vim-easymotion"}
 	use {"mg979/vim-visual-multi"}
 	use {"luochen1990/rainbow"}
@@ -52,8 +52,22 @@ return require("packer").startup(function()
 	use {"tpope/vim-unimpaired"}
 	use {"tpope/vim-vinegar"}
 	use {"tpope/vim-sensible"}
-		
+
 	-- Neovim
+	use {
+		"neovim/nvim-lspconfig",
+		config = function()
+			--require("lspconfig").pyright.setup();
+			require("lspconfig").sumneko_lua.setup({cmd = {"lua-language-server.bat"}})
+		end
+	}
+	use {
+		"nvim-treesitter/nvim-treesitter",
+		config = function() require("nvim-treesitter.configs").setup({
+			ensure_installed = "maintained",
+		}) end,
+		run = ":TSUpdate"
+	}
 	use {
 		"ms-jpq/coq_nvim",
 		branch = "coq",
