@@ -5,9 +5,11 @@ return require("packer").startup(function(use)
 	-- Disabled
 	-- use {"scrooloose/nerdtree"}
 	-- use {"scrooloose/syntastic"}
+	-- use {"luochen1990/rainbow"}
 	-- use {"airblade/vim-gitgutter"}
 	-- use {"vim-airline/vim-airline"}
 	-- use {"w0rp/ale"}
+	-- use {"easymotion/vim-easymotion"}
 	-- use {
 	-- 	"valloric/youcompleteme",
 	-- 	run = "install.py --msvc 17 --cmake-path \"C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/bin/cmake.exe\""
@@ -33,9 +35,7 @@ return require("packer").startup(function(use)
 	use {"majutsushi/tagbar"}
 	use {"tpope/vim-repeat"}
 
-	use {"easymotion/vim-easymotion"}
 	use {"mg979/vim-visual-multi"}
-	--use {"luochen1990/rainbow"}
 	use {"tpope/vim-eunuch"}
 	use {"editorconfig/editorconfig-vim"}
 	use {"tpope/vim-abolish"}
@@ -120,6 +120,9 @@ return require("packer").startup(function(use)
 	use {
 		"norcalli/nvim-colorizer.lua",
 		config = function() require("colorizer").setup() end
+	}
+	use {
+		"ggandor/lightspeed.nvim"
 	}
 
 end)
