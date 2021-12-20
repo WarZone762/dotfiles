@@ -35,7 +35,7 @@ return require("packer").startup(function(use)
 
 	use {"easymotion/vim-easymotion"}
 	use {"mg979/vim-visual-multi"}
-	use {"luochen1990/rainbow"}
+	--use {"luochen1990/rainbow"}
 	use {"tpope/vim-eunuch"}
 	use {"editorconfig/editorconfig-vim"}
 	use {"tpope/vim-abolish"}
@@ -81,11 +81,23 @@ return require("packer").startup(function(use)
 		config = function() vim.defer_fn(function() vim.api.nvim_command("COQnow") end, 1000) end
 	}
 	use {
+		"mfussenegger/nvim-dap"
+	}
+	use {
 		"nvim-telescope/telescope.nvim",
 		requires = {"nvim-lua/plenary.nvim"}
 	}
 	use {
 		"liuchengxu/vista.vim"
+	}
+	use {
+		"p00f/nvim-ts-rainbow",
+		after = "nvim-treesitter",
+		config = function() require("nvim-treesitter.configs").setup({
+			rainbow = {
+				enable = true,
+				extended_mode = true
+			}}) end
 	}
 	use {
 		"kyazdani42/nvim-tree.lua",
