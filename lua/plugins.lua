@@ -1,4 +1,4 @@
-return require("packer").startup(function(use)
+return require("packer").startup(function(use, vim)
 	-- Packer
 	use {"wbthomason/packer.nvim"}
 
@@ -23,10 +23,6 @@ return require("packer").startup(function(use)
 	-- 		":CHADdeps"
 	-- 	}
 	-- }
-	use {
-		"TimUntersberger/neogit",
-		requires = {"nvim-lua/plenary.nvim"}
-	}
 
 	-- Vim
 	use {"tpope/vim-fugitive"}
@@ -131,7 +127,18 @@ return require("packer").startup(function(use)
     "folke/trouble.nvim",
     requires = "kyazdani42/nvim-web-devicons",
     config = function() require("trouble").setup() end
-}
+  }
+	use {
+		"TimUntersberger/neogit",
+		requires = {"nvim-lua/plenary.nvim"}
+	}
+  use {
+    "marko-cerovac/material.nvim",
+    config = [[
+      vim.g.material_style = "darker"
+      vim.cmd('colorscheme material')
+    ]]
+  }
 
 end)
 
