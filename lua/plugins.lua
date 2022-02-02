@@ -121,6 +121,10 @@ return require("packer").startup(function(use)
     "tami5/lspsaga.nvim",
     config = function() require("lspsaga").setup() end
   }
+  use {
+    "RRethy/vim-illuminate",
+    config = function() require("illuminate").on_attach() end
+  }
 
   use {
     "marko-cerovac/material.nvim",
