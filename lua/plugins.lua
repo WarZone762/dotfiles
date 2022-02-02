@@ -23,15 +23,14 @@ return require("packer").startup(function(use)
 	-- 		":CHADdeps"
 	-- 	}
 	-- }
-	-- use {
-	-- 	"TimUntersberger/neogit",
-	-- 	requires = {"nvim-lua/plenary.nvim"}
-	-- }
+	use {
+		"TimUntersberger/neogit",
+		requires = {"nvim-lua/plenary.nvim"}
+	}
 
 	-- Vim
 	use {"tpope/vim-fugitive"}
 	use {"tpope/vim-surround"}
-	use {"scrooloose/nerdcommenter"}
 	use {"majutsushi/tagbar"}
 	use {"tpope/vim-repeat"}
 
@@ -124,6 +123,15 @@ return require("packer").startup(function(use)
 	use {
 		"ggandor/lightspeed.nvim"
 	}
+  use {
+    "numToStr/Comment.nvim",
+    config = function() require("Comment").setup() end
+  }
+  use {
+    "folke/trouble.nvim",
+    requires = "kyazdani42/nvim-web-devicons",
+    config = function() require("trouble").setup() end
+}
 
 end)
 
