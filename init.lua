@@ -14,10 +14,12 @@ opt.completeopt = {"menu", "menuone", "longest", "preview", "noselect"}
 
 opt.mouse = "a"
 
+cmd("filetype plugin indent on")
 opt.expandtab = true
 opt.tabstop = 2
 opt.shiftwidth = 2
-cmd("filetype plugin indent on")
+
+opt.breakindent = true
 
 opt.ignorecase = true
 opt.smartcase = true

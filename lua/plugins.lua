@@ -1,4 +1,5 @@
 return require("packer").startup(function(use)
+  vim = vim
 	-- Packer
 	use {"wbthomason/packer.nvim"}
 
@@ -12,7 +13,6 @@ return require("packer").startup(function(use)
 	use {"tpope/vim-eunuch"}
 	use {"editorconfig/editorconfig-vim"}
 	use {"tpope/vim-abolish"}
-	use {"raimondi/delimitmate"}
 	use {"kkoomen/vim-doge"}
 	use {"terryma/vim-expand-region"}
 	use {"sjl/gundo.vim"}
@@ -27,14 +27,16 @@ return require("packer").startup(function(use)
 	use {"tpope/vim-sensible"}
 
 	-- Neovim
-	use {
-		"neovim/nvim-lspconfig",
-		config = function()
-			local lspconfig = require("lspconfig")
-			lspconfig.pyright.setup({})
-			lspconfig.sumneko_lua.setup({cmd = {"cmd.exe", "/C", "lua-language-server"}})
-		end
-	}
+	use {"neovim/nvim-lspconfig"}
+  use {
+    "williamboman/nvim-lsp-installer",
+    config = function() require("nvim-lsp-installer").on_server_ready(
+      function(server)
+        local opts = {}
+        server:setup(opts)
+      end
+    ) end
+  }
 	use {
 		"nvim-treesitter/nvim-treesitter",
 		config = function() require("nvim-treesitter.configs").setup({
@@ -62,9 +64,7 @@ return require("packer").startup(function(use)
       }
     },
     run = ":COQdeps",
-    config = [[
-      vim.defer_fn(function() vim.api.nvim_command("COQnow --shut-up") end, 0)
-    ]]
+    config = "vim.g.coq_settings = {auto_start = 'shut-up'}"
   }
 	use {"mfussenegger/nvim-dap"}
 	use {
@@ -123,15 +123,72 @@ return require("packer").startup(function(use)
   }
   use {
     "RRethy/vim-illuminate",
-    config = function() require("illuminate").on_attach() end
+    config = function()
+      vim.defer_fn(function() require("illuminate").on_attach() end, 5000)
+    end
+  }
+  use {
+    "akinsho/bufferline.nvim",
+    requires = "kyazdani42/nvim-web-devicons",
+    config = require("bufferline").setup()
+  }
+  use {
+    "windwp/nvim-autopairs",
+    after = "coq_nvim",
+    config = function() vim.defer_fn(function()
+      local autopairs = require("nvim-autopairs")
+
+      autopairs.setup({map_bs = false, map_cr = false})
+
+      _G.AutopairsFunctions = {}
+
+      AutopairsFunctions.CR = function()
+        if vim.fn.pumvisible() ~= 0 then
+          if vim.fn.complete_info({"selected"}).selected ~= -1 then
+            return autopairs.esc("<c-y>")
+          else
+            return autopairs.esc("<c-e>") .. autopairs.autopairs_cr()
+          end
+        else
+          return autopairs.autopairs_cr()
+        end
+      end
+      vim.api.nvim_set_keymap(
+        "i",
+        "<cr>",
+        "v:lua.AutopairsFunctions.CR()",
+        {expr = true, noremap = true}
+      )
+
+      AutopairsFunctions.BS = function()
+        if
+          vim.fn.pumvisible() ~= 0
+          and vim.fn.complete_info({"mode"}).mode == "eval"
+        then
+          return autopairs.esc("<c-e>") .. autopairs.autopairs_bs()
+        else
+          return autopairs.autopairs_bs()
+        end
+      end
+      vim.api.nvim_set_keymap(
+        "i",
+        "<bs>",
+        "v:lua.AutopairsFunctions.BS()",
+        {expr = true, noremap = true}
+      )
+    end, 2500) end
+  }
+  use {
+    "windwp/nvim-ts-autotag",
+    config = function() require("nvim-ts-autotag").setup() end
   }
 
   use {
     "marko-cerovac/material.nvim",
-    config = [[
+    config = function()
       vim.g.material_style = "darker"
       vim.cmd('colorscheme material')
-    ]]
+    end
   }
 
 end)
