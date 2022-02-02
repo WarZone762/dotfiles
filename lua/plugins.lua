@@ -47,11 +47,24 @@ return require("packer").startup(function(use)
     "ms-jpq/coq_nvim",
     branch = "coq",
     requires = {
-      "ms-jpq/coq.artifacts",
-      branch = "artifacts"
+      {
+        "ms-jpq/coq.artifacts",
+        branch = "artifacts"
+      },
+      {
+        "ms-jpq/coq.thirdparty",
+        branch = "3p",
+        config = function() require("coq_3p") {{
+          src = "nvimlua",
+          short_name = "nLUA",
+          conf_only = true
+        }} end
+      }
     },
     run = ":COQdeps",
-    config = [[vim.defer_fn(function() vim.api.nvim_command("COQnow") end, 0)]]
+    config = [[
+      vim.defer_fn(function() vim.api.nvim_command("COQnow --shut-up") end, 0)
+    ]]
   }
 	use {"mfussenegger/nvim-dap"}
 	use {
