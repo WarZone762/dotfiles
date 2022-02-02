@@ -138,7 +138,7 @@ return require("packer").startup(function(use)
     config = function() vim.defer_fn(function()
       local autopairs = require("nvim-autopairs")
 
-      autopairs.setup({map_bs = false, map_cr = false})
+      autopairs.setup({map_bs = true, map_cr = false, check_ts = true})
 
       _G.AutopairsFunctions = {}
 
@@ -181,6 +181,10 @@ return require("packer").startup(function(use)
   use {
     "windwp/nvim-ts-autotag",
     config = function() require("nvim-ts-autotag").setup() end
+  }
+  use {
+    "ray-x/lsp_signature.nvim",
+    config = function() require("lsp_signature").setup() end
   }
 
   use {
