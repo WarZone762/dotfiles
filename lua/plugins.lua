@@ -1,28 +1,6 @@
-return require("packer").startup(function(use, vim)
+return require("packer").startup(function(use)
 	-- Packer
 	use {"wbthomason/packer.nvim"}
-
-	-- Disabled
-	-- use {"scrooloose/nerdtree"}
-	-- use {"scrooloose/syntastic"}
-	-- use {"luochen1990/rainbow"}
-	-- use {"airblade/vim-gitgutter"}
-	-- use {"vim-airline/vim-airline"}
-	-- use {"w0rp/ale"}
-	-- use {"easymotion/vim-easymotion"}
-	-- use {
-	-- 	"valloric/youcompleteme",
-	-- 	run = "install.py --msvc 17 --cmake-path \"C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/bin/cmake.exe\""
-	-- }
-	-- use {"yggdroot/indentline"}
-	-- use {
-	-- 	"ms-jpq/chadtree",
-	-- 	branch = "chad",
-	-- 	run = {
-	-- 		"python3 -m chadtree deps",
-	-- 		":CHADdeps"
-	-- 	}
-	-- }
 
 	-- Vim
 	use {"tpope/vim-fugitive"}
@@ -65,26 +43,22 @@ return require("packer").startup(function(use, vim)
 		}) end,
 		run = ":TSUpdate"
 	}
---	use {
---		"ms-jpq/coq_nvim",
---		branch = "coq",
---		requires = {
---			"ms-jpq/coq.artifacts",
---			branch = "artifacts"
---		},
---		run = ":COQdeps",
---		config = function() vim.defer_fn(function() vim.api.nvim_command("COQnow") end, 1000) end
---	}
-	use {
-		"mfussenegger/nvim-dap"
-	}
+  use {
+    "ms-jpq/coq_nvim",
+    branch = "coq",
+    requires = {
+      "ms-jpq/coq.artifacts",
+      branch = "artifacts"
+    },
+    run = ":COQdeps",
+    config = [[vim.defer_fn(function() vim.api.nvim_command("COQnow") end, 0)]]
+  }
+	use {"mfussenegger/nvim-dap"}
 	use {
 		"nvim-telescope/telescope.nvim",
 		requires = {"nvim-lua/plenary.nvim"}
 	}
-	use {
-		"liuchengxu/vista.vim"
-	}
+	use {"liuchengxu/vista.vim"}
 	use {
 		"p00f/nvim-ts-rainbow",
 		after = "nvim-treesitter",
@@ -116,9 +90,7 @@ return require("packer").startup(function(use, vim)
 		"norcalli/nvim-colorizer.lua",
 		config = function() require("colorizer").setup() end
 	}
-	use {
-		"ggandor/lightspeed.nvim"
-	}
+	use {"ggandor/lightspeed.nvim"}
   use {
     "numToStr/Comment.nvim",
     config = function() require("Comment").setup() end
@@ -132,6 +104,11 @@ return require("packer").startup(function(use, vim)
 		"TimUntersberger/neogit",
 		requires = {"nvim-lua/plenary.nvim"}
 	}
+  use {
+    "tami5/lspsaga.nvim",
+    config = function() require("lspsaga").setup() end
+  }
+
   use {
     "marko-cerovac/material.nvim",
     config = [[
