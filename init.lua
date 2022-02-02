@@ -1,19 +1,42 @@
-local set = vim.opt
+local vim = vim
+local opt = vim.opt
+local cmd = vim.cmd
 
-set.number = true
-set.relativenumber = true
--- set.t_Co = 256
-set.termguicolors = true
+opt.splitright = true
+opt.splitbelow = true
 
-set.directory = vim.env.TEMP .. "/nvim//"
-set.backupdir = vim.env.TEMP .. "/nvim//"
-set.undodir = vim.env.TEMP .. "/nvim//"
+opt.number = true
+opt.relativenumber = true
+opt.signcolumn = "yes"
+opt.colorcolumn = "80"
+
+opt.completeopt = {"menu", "menuone", "longest", "preview", "noselect"}
+
+opt.mouse = "a"
+
+opt.expandtab = true
+opt.tabstop = 2
+opt.shiftwidth = 2
+cmd("filetype plugin indent on")
+
+opt.ignorecase = true
+opt.smartcase = true
+
+opt.backup = true
+opt.undofile = true
+
+-- opt.t_Co = 256
+opt.termguicolors = true
+
+opt.directory = vim.env.TEMP .. "/nvim//"
+opt.backupdir = vim.env.TEMP .. "/nvim//"
+opt.undodir = vim.env.TEMP .. "/nvim//"
 
 if string.find(vim.env.ComSpec, "cmd.exe") then
-	set.shell = "powershell"
-	set.shellcmdflag = "-Command"
-	set.shellquote = ""
-	set.shellxquote = ""
+	opt.shell = "powershell"
+	opt.shellcmdflag = "-Command"
+	opt.shellquote = ""
+	opt.shellxquote = ""
 end
 
 require("./plugins")

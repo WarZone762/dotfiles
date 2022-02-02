@@ -59,7 +59,7 @@ return require("packer").startup(function(use)
 		config = function()
 			local lspconfig = require("lspconfig")
 			lspconfig.pyright.setup({})
-			lspconfig.sumneko_lua.setup({cmd = {"cmd.exe", "/C","lua-language-server"}})
+			lspconfig.sumneko_lua.setup({cmd = {"cmd.exe", "/C", "lua-language-server"}})
 		end
 	}
 	use {
@@ -70,16 +70,16 @@ return require("packer").startup(function(use)
 		}) end,
 		run = ":TSUpdate"
 	}
-	use {
-		"ms-jpq/coq_nvim",
-		branch = "coq",
-		requires = {
-			"ms-jpq/coq.artifacts",
-			branch = "artifacts"
-		},
-		run = ":COQdeps",
-		config = function() vim.defer_fn(function() vim.api.nvim_command("COQnow") end, 1000) end
-	}
+--	use {
+--		"ms-jpq/coq_nvim",
+--		branch = "coq",
+--		requires = {
+--			"ms-jpq/coq.artifacts",
+--			branch = "artifacts"
+--		},
+--		run = ":COQdeps",
+--		config = function() vim.defer_fn(function() vim.api.nvim_command("COQnow") end, 1000) end
+--	}
 	use {
 		"mfussenegger/nvim-dap"
 	}
