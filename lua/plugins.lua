@@ -27,12 +27,19 @@ return require("packer").startup(function(use)
 	use {"tpope/vim-sensible"}
 
 	-- Neovim
+  use {"L3MON4D3/LuaSnip"}
 	use {"neovim/nvim-lspconfig"}
   use {
     "williamboman/nvim-lsp-installer",
     config = function() require("nvim-lsp-installer").on_server_ready(
       function(server)
-        local opts = {}
+        local capabilities = vim.lsp.protocol.make_client_capabilities()
+        capabilities.textDocument.completion.completionItem.snippetSupport =
+          true
+
+        local opts = {
+          capabilities = capabilities,
+        }
         server:setup(opts)
       end
     ) end
