@@ -4,76 +4,145 @@ return require("packer").startup(function(use)
 	use {"wbthomason/packer.nvim"}
 
 	-- Vim
-	use {"tpope/vim-fugitive"}
-	use {"tpope/vim-surround"}
-	use {"majutsushi/tagbar"}
-	use {"tpope/vim-repeat"}
-
-	use {"mg979/vim-visual-multi"}
-	use {"tpope/vim-eunuch"}
 	use {"editorconfig/editorconfig-vim"}
-	use {"tpope/vim-abolish"}
-	use {"kkoomen/vim-doge"}
-	use {"terryma/vim-expand-region"}
-	use {"sjl/gundo.vim"}
 	use {"godlygeek/tabular"}
-	use {"wellle/targets.vim"}
-	use {"kana/vim-textobj-user"}
-	use {"kana/vim-textobj-line"}
-	use {"michaeljsmith/vim-indent-object"}
 	use {"kana/vim-textobj-entire"}
+	use {"kana/vim-textobj-line"}
+	use {"kana/vim-textobj-user"}
+	use {"kkoomen/vim-doge"}
+	use {"majutsushi/tagbar"}
+	use {"mg979/vim-visual-multi"}
+	use {"michaeljsmith/vim-indent-object"}
+	use {"sjl/gundo.vim"}
+	use {"terryma/vim-expand-region"}
+	use {"tpope/vim-abolish"}
+	use {"tpope/vim-eunuch"}
+	use {"tpope/vim-fugitive"}
+	use {"tpope/vim-repeat"}
+	use {"tpope/vim-sensible"}
+	use {"tpope/vim-surround"}
 	use {"tpope/vim-unimpaired"}
 	use {"tpope/vim-vinegar"}
-	use {"tpope/vim-sensible"}
+	use {"wellle/targets.vim"}
 
 	-- Neovim
-  use {"RRethy/vim-illuminate"}
-  use {"L3MON4D3/LuaSnip"}
   use {
-    "ms-jpq/coq_nvim",
-    branch = "coq",
-    requires = {
-      {
-        "ms-jpq/coq.artifacts",
-        branch = "artifacts"
-      },
-      {
-        "ms-jpq/coq.thirdparty",
-        branch = "3p",
-        config = function() require("coq_3p") {{
-          src = "nvimlua",
-          short_name = "nLUA",
-          conf_only = true
-        }} end
-      }
-    },
-    run = ":COQdeps",
-    config = function() vim.g.coq_settings = {auto_start = 'shut-up'} end
+    "windwp/nvim-autopairs",
+    config = function()
+      require("nvim-autopairs").setup({})
+    end
   }
-	use {"neovim/nvim-lspconfig"}
+
+  use {
+    "hrsh7th/nvim-cmp",
+    requires = {
+      "hrsh7th/cmp-buffer",
+      "hrsh7th/cmp-cmdline",
+      "hrsh7th/cmp-nvim-lsp",
+      "hrsh7th/cmp-path",
+      "L3MON4D3/LuaSnip",
+      "saadparwaiz1/cmp_luasnip",
+    },
+    after = {
+      "nvim-autopairs",
+    },
+    config = function()
+      local has_words_before = function()
+        local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+        return col ~= 0 and vim.api.nvim_buf_get_lines(
+          0, line - 1, line, true
+        )[1]:sub(col, col):match("%s") == nil
+      end
+
+      local luasnip = require("luasnip")
+      local cmp = require("cmp")
+
+      cmp.setup({
+        snippet = {
+          expand = function(args)
+            require("luasnip").lsp_expand(args.body)
+          end,
+        },
+        mapping = {
+          ["<C-b>"] = cmp.mapping(cmp.mapping.scroll_docs(-4), { "i", "c" }),
+          ["<C-f>"] = cmp.mapping(cmp.mapping.scroll_docs(4), { "i", "c" }),
+          ["<C-Space>"] = cmp.mapping(cmp.mapping.complete(), { "i", "c" }),
+          ["<C-y>"] = cmp.config.disable,
+          ["<C-e>"] = cmp.mapping({
+            i = cmp.mapping.abort(),
+            c = cmp.mapping.close(),
+          }),
+          ["<CR>"] = cmp.mapping.confirm({ select = true }),
+
+          ["<Tab>"] = cmp.mapping(function(fallback)
+            if cmp.visible() then
+              cmp.select_next_item()
+            elseif luasnip.expand_or_jumpable() then
+              luasnip.expand_or_jump()
+            elseif has_words_before() then
+              cmp.complete()
+            else
+              fallback()
+            end
+          end, { "i", "s" }),
+
+          ["<S-Tab>"] = cmp.mapping(function(fallback)
+            if cmp.visible() then
+              cmp.select_prev_item()
+            elseif luasnip.jumpable(-1) then
+              luasnip.jump(-1)
+            else
+              fallback()
+            end
+          end, { "i", "s" }),
+    },
+        sources = cmp.config.sources({
+          {name = "nvim_lsp"},
+          {name = "luasnip"},
+        }, {
+          {name = "buffer"},
+        })
+      })
+
+      cmp.setup.cmdline("/", {
+        sources = {
+          {name = "buffer"}
+        }
+      })
+
+      cmp.setup.cmdline(":", {
+        sources = cmp.config.sources({
+          {name = "path"}
+        }, {
+          {name = "cmdline"}
+        })
+      })
+    end
+  }
+  use {"RRethy/vim-illuminate"}
   use {
     "williamboman/nvim-lsp-installer",
-    after = {"vim-illuminate", "coq_nvim"},
+    requires = {
+      "neovim/nvim-lspconfig",
+    },
+    after = {
+      "nvim-cmp",
+      "vim-illuminate",
+    },
     config = function() require("nvim-lsp-installer").on_server_ready(
       function(server)
         local function on_attach(client, bufnr)
           require("illuminate").on_attach(client)
         end
 
-        local capabilities = vim.lsp.protocol.make_client_capabilities()
-        capabilities.textDocument.completion.completionItem.snippetSupport =
-          true
-
-        local coq = require("coq")
+        local capabilities = require("cmp_nvim_lsp").update_capabilities(
+          vim.lsp.protocol.make_client_capabilities()
+        )
 
         local opts = {
           on_attach = on_attach,
           capabilities = capabilities,
         }
-
-        for key, value in pairs(coq.lsp_ensure_capabilities()) do
-          opts[key] = value
-        end
 
         server:setup(opts)
       end
@@ -90,12 +159,16 @@ return require("packer").startup(function(use)
 	use {"mfussenegger/nvim-dap"}
 	use {
 		"nvim-telescope/telescope.nvim",
-		requires = {"nvim-lua/plenary.nvim"}
+		requires = {
+      "nvim-lua/plenary.nvim",
+    }
 	}
 	use {"liuchengxu/vista.vim"}
 	use {
 		"p00f/nvim-ts-rainbow",
-		after = "nvim-treesitter",
+		requires = {
+      "nvim-treesitter/nvim-treesitter"
+    },
 		config = function() require("nvim-treesitter.configs").setup({
 			rainbow = {
 				enable = true,
@@ -104,7 +177,9 @@ return require("packer").startup(function(use)
 	}
 	use {
 		"kyazdani42/nvim-tree.lua",
-		requires = {"kyazdani42/nvim-web-devicons"},
+		requires = {
+      "kyazdani42/nvim-web-devicons",
+    },
 		config = function() require("nvim-tree").setup() end
 	}
 	use {
@@ -113,7 +188,9 @@ return require("packer").startup(function(use)
 	}
 	use {
 		"lewis6991/gitsigns.nvim",
-		requires = {"nvim-lua/plenary.nvim"},
+		requires = {
+      "nvim-lua/plenary.nvim"
+    },
 		config = function() require("gitsigns").setup() end
 	}
 	use {
@@ -131,12 +208,16 @@ return require("packer").startup(function(use)
   }
   use {
     "folke/trouble.nvim",
-    requires = "kyazdani42/nvim-web-devicons",
+    requires = {
+      "kyazdani42/nvim-web-devicons"
+    },
     config = function() require("trouble").setup() end
   }
 	use {
 		"TimUntersberger/neogit",
-		requires = {"nvim-lua/plenary.nvim"}
+		requires = {
+      "nvim-lua/plenary.nvim",
+    }
 	}
   use {
     "tami5/lspsaga.nvim",
@@ -144,56 +225,10 @@ return require("packer").startup(function(use)
   }
   use {
     "akinsho/bufferline.nvim",
-    requires = "kyazdani42/nvim-web-devicons",
+    requires = {
+      "kyazdani42/nvim-web-devicons",
+    },
     config = require("bufferline").setup()
-  }
-  use {
-    "windwp/nvim-autopairs",
-    after = "coq_nvim",
-    config = function() vim.defer_fn(function()
-      local autopairs = require("nvim-autopairs")
-
-      autopairs.setup({map_bs = false, map_cr = false, check_ts = true})
-
-      _G.AutopairsFunctions = {}
-
-      AutopairsFunctions.CR = function()
-        if vim.fn.pumvisible() ~= 0 then
-          if vim.fn.complete_info({"selected"}).selected ~= -1 then
-            return autopairs.esc("<C-y>")
-          else
-            return autopairs.esc("<C-e>") ..
-              autopairs.autopairs_cr(vim.api.nvim_get_current_buf())
-          end
-        else
-          return autopairs.autopairs_cr(vim.api.nvim_get_current_buf())
-        end
-      end
-      vim.api.nvim_set_keymap(
-        "i",
-        "<CR>",
-        "v:lua.AutopairsFunctions.CR()",
-        {expr = true, noremap = true}
-      )
-
-      AutopairsFunctions.BS = function()
-        if
-          vim.fn.pumvisible() ~= 0
-          and vim.fn.complete_info({"mode"}).mode == "eval"
-        then
-          return autopairs.esc("<C-e>") ..
-            autopairs.autopairs_bs(vim.api.nvim_get_current_buf())
-        else
-          return autopairs.autopairs_bs(vim.api.nvim_get_current_buf())
-        end
-      end
-      vim.api.nvim_set_keymap(
-        "i",
-        "<BS>",
-        "v:lua.AutopairsFunctions.BS()",
-        {expr = true, noremap = true}
-      )
-    end, 2500) end
   }
   use {
     "windwp/nvim-ts-autotag",
