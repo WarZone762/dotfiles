@@ -1,5 +1,9 @@
 return require("packer").startup(function(use)
   vim = vim
+  local function default_config(plugin_name)
+    require(plugin_name).setup()
+  end
+
 	-- Packer
 	use {"wbthomason/packer.nvim"}
 
@@ -28,9 +32,7 @@ return require("packer").startup(function(use)
 	-- Neovim
   use {
     "windwp/nvim-autopairs",
-    config = function()
-      require("nvim-autopairs").setup({})
-    end
+    config = default_config("nvim-autopairs"),
   }
 
   use {
@@ -95,13 +97,17 @@ return require("packer").startup(function(use)
               fallback()
             end
           end, { "i", "s" }),
-    },
+        },
         sources = cmp.config.sources({
           {name = "nvim_lsp"},
           {name = "luasnip"},
         }, {
           {name = "buffer"},
-        })
+        }),
+
+        experimental = {
+          ghost_text = true,
+        }
       })
 
       cmp.setup.cmdline("/", {
@@ -180,38 +186,38 @@ return require("packer").startup(function(use)
 		requires = {
       "kyazdani42/nvim-web-devicons",
     },
-		config = function() require("nvim-tree").setup() end
+    config = default_config("nvim-tree"),
 	}
 	use {
 		"nvim-lualine/lualine.nvim",
-		config = function() require("lualine").setup() end
+    config = default_config("lualine"),
 	}
 	use {
 		"lewis6991/gitsigns.nvim",
 		requires = {
       "nvim-lua/plenary.nvim"
     },
-		config = function() require("gitsigns").setup() end
+    config = default_config("gitsigns"),
 	}
 	use {
 		"lukas-reineke/indent-blankline.nvim",
-		config = function() require("indent_blankline").setup() end
+    config = default_config("indent_blankline"),
 	}
 	use {
 		"norcalli/nvim-colorizer.lua",
-		config = function() require("colorizer").setup() end
+    config = default_config("colorizer"),
 	}
 	use {"ggandor/lightspeed.nvim"}
   use {
     "numToStr/Comment.nvim",
-    config = function() require("Comment").setup() end
+    config = default_config("Comment"),
   }
   use {
     "folke/trouble.nvim",
     requires = {
       "kyazdani42/nvim-web-devicons"
     },
-    config = function() require("trouble").setup() end
+    config = default_config("trouble"),
   }
 	use {
 		"TimUntersberger/neogit",
@@ -221,7 +227,7 @@ return require("packer").startup(function(use)
 	}
   use {
     "tami5/lspsaga.nvim",
-    config = function() require("lspsaga").setup() end
+    config = default_config("lspsaga"),
   }
   use {
     "akinsho/bufferline.nvim",
@@ -232,11 +238,11 @@ return require("packer").startup(function(use)
   }
   use {
     "windwp/nvim-ts-autotag",
-    config = function() require("nvim-ts-autotag").setup() end
+    config = default_config("nvim-ts-autotag"),
   }
   use {
     "ray-x/lsp_signature.nvim",
-    config = function() require("lsp_signature").setup() end
+    config = default_config("lsp_signature"),
   }
 
   use {
