@@ -1,5 +1,5 @@
 require("packer").startup(function(use)
-  vim = vim
+  local vim = vim
 
   local function default_config(plugin_name)
     return "require('" .. plugin_name .. "').setup()"
@@ -27,6 +27,7 @@ require("packer").startup(function(use)
   use {"tpope/vim-surround"}
   use {"tpope/vim-unimpaired"}
   use {"wellle/targets.vim"}
+  use {"unblevable/quick-scope"}
 
   -- Neovim
 
@@ -282,7 +283,7 @@ require("packer").startup(function(use)
     "marko-cerovac/material.nvim",
     config = function()
       vim.g.material_style = "darker"
-      vim.cmd('colorscheme material')
+      vim.cmd("colorscheme material")
     end
   }
 

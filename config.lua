@@ -47,6 +47,9 @@ if vim.fn.exists("g:vscode") == 1 then
 	api.nvim_set_keymap("n", "gc", "<Plug>VSCodeCommentary", {})
 	api.nvim_set_keymap("o", "gc", "<Plug>VSCodeCommentary", {})
 	api.nvim_set_keymap("n", "gcc", "<Plug>VSCodeCommentaryLine", {})
+
+	api.nvim_command("highlight QuickScopePrimary guifg='#afff5f' gui=underline ctermfg=155 cterm=underline")
+	api.nvim_command("highlight QuickScopeSecondary guifg='#5fffff' gui=underline ctermfg=81 cterm=underline")
 end
 
 -- Plugins

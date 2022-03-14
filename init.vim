@@ -1,1 +1,1 @@
-luafile init.lua
+luafile $MYVIMRC/../config.lua
