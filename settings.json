@@ -1,0 +1,7 @@
+{
+    "vscode-neovim.neovimExecutablePaths.win32": "D:\\Users\\User\\Programs\\Scoop\\apps\\neovim-nightly\\current\\bin\\nvim.exe",
+    "editor.lineNumbers": "relative",
+    "editor.fontFamily": "'CaskaydiaCove NF', Consolas, 'Courier New', monospace",
+    "editor.fontLigatures": true,
+    "git.autofetch": true
+}

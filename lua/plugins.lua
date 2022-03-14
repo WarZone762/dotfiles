@@ -1,52 +1,83 @@
-return require("packer").startup(function(use)
+require("packer").startup(function(use)
   vim = vim
+
   local function default_config(plugin_name)
-    require(plugin_name).setup()
+    return "require('" .. plugin_name .. "').setup()"
   end
 
-	-- Packer
-	use {"wbthomason/packer.nvim"}
+  local function no_vscode()
+    return vim.fn.exists("g:vscode") == 0
+  end
 
-	-- Vim
-	use {"editorconfig/editorconfig-vim"}
-	use {"godlygeek/tabular"}
-	use {"kana/vim-textobj-entire"}
-	use {"kana/vim-textobj-line"}
-	use {"kana/vim-textobj-user"}
-	use {"kkoomen/vim-doge"}
-	use {"majutsushi/tagbar"}
-	use {"mg979/vim-visual-multi"}
-	use {"michaeljsmith/vim-indent-object"}
-	use {"sjl/gundo.vim"}
-	use {"terryma/vim-expand-region"}
-	use {"tpope/vim-abolish"}
-	use {"tpope/vim-eunuch"}
-	use {"tpope/vim-fugitive"}
-	use {"tpope/vim-repeat"}
-	use {"tpope/vim-sensible"}
-	use {"tpope/vim-surround"}
-	use {"tpope/vim-unimpaired"}
-	use {"tpope/vim-vinegar"}
-	use {"wellle/targets.vim"}
 
-	-- Neovim
+  -- Packer
+  use {"wbthomason/packer.nvim"}
+
+  -- Vim
+  use {"godlygeek/tabular"}
+  use {"kana/vim-textobj-entire"}
+  use {"kana/vim-textobj-line"}
+  use {"kana/vim-textobj-user"}
+  use {"mg979/vim-visual-multi"}
+  use {"terryma/vim-expand-region"}
+  use {"michaeljsmith/vim-indent-object"}
+  use {"tpope/vim-abolish"}
+  use {"tpope/vim-eunuch"}
+  use {"tpope/vim-repeat"}
+  use {"tpope/vim-surround"}
+  use {"tpope/vim-unimpaired"}
+  use {"wellle/targets.vim"}
+
+  -- Neovim
+
+  -- Not VSCode
+  local no_vscode_plugins = {}
+  local use_original = use
+
+  local function use_no_vscode(...)
+    arg = ...
+    -- arg.fn = "Testfn"
+    arg.opt = true
+    table.insert(no_vscode_plugins, arg[1])
+    use_original(arg)
+  end
+
+  local use = use_no_vscode
+
+  -- Vim
+  use {"editorconfig/editorconfig-vim"}
+  use {"simnalamburt/vim-mundo"}
+  use {"tpope/vim-fugitive"}
+  use {"asvetliakov/vim-easymotion"}
+
+  -- Neovim
   use {
     "windwp/nvim-autopairs",
     config = default_config("nvim-autopairs"),
   }
 
+  use {"hrsh7th/cmp-buffer"}
+  use {"hrsh7th/cmp-cmdline"}
+  use {"hrsh7th/cmp-nvim-lsp"}
+  use {"hrsh7th/cmp-path"}
+  use {"L3MON4D3/LuaSnip"}
+  use {
+    "saadparwaiz1/cmp_luasnip",
+    after = {
+      "LuaSnip",
+      "nvim-cmp",
+    }
+  }
+
   use {
     "hrsh7th/nvim-cmp",
-    requires = {
-      "hrsh7th/cmp-buffer",
-      "hrsh7th/cmp-cmdline",
-      "hrsh7th/cmp-nvim-lsp",
-      "hrsh7th/cmp-path",
-      "L3MON4D3/LuaSnip",
-      "saadparwaiz1/cmp_luasnip",
-    },
     after = {
-      "nvim-autopairs",
+      "nvim-lspconfig",
+      "cmp-buffer",
+      "cmp-cmdline",
+      "cmp-nvim-lsp",
+      "cmp-path",
+      "LuaSnip",
     },
     config = function()
       local has_words_before = function()
@@ -126,14 +157,13 @@ return require("packer").startup(function(use)
     end
   }
   use {"RRethy/vim-illuminate"}
+  use {"neovim/nvim-lspconfig"}
   use {
     "williamboman/nvim-lsp-installer",
-    requires = {
-      "neovim/nvim-lspconfig",
-    },
     after = {
       "nvim-cmp",
       "vim-illuminate",
+      "nvim-lspconfig",
     },
     config = function() require("nvim-lsp-installer").on_server_ready(
       function(server)
@@ -154,90 +184,93 @@ return require("packer").startup(function(use)
       end
     ) end
   }
-	use {
-		"nvim-treesitter/nvim-treesitter",
-		config = function() require("nvim-treesitter.configs").setup({
-			ensure_installed = "maintained",
-			highlight = {enable = true}
-		}) end,
-		run = ":TSUpdate"
-	}
-	use {"mfussenegger/nvim-dap"}
-	use {
-		"nvim-telescope/telescope.nvim",
-		requires = {
-      "nvim-lua/plenary.nvim",
+  use {
+    "nvim-treesitter/nvim-treesitter",
+    config = function() require("nvim-treesitter.configs").setup({
+      ensure_installed = "maintained",
+      highlight = {enable = true}
+    }) end,
+    run = ":TSUpdate"
+  }
+  use {"mfussenegger/nvim-dap"}
+  use {"nvim-lua/plenary.nvim"}
+  use {
+    "nvim-telescope/telescope.nvim",
+    after = {
+      "plenary.nvim",
     }
-	}
-	use {"liuchengxu/vista.vim"}
-	use {
-		"p00f/nvim-ts-rainbow",
-		requires = {
-      "nvim-treesitter/nvim-treesitter"
+  }
+  use {"liuchengxu/vista.vim"}
+  use {
+    "p00f/nvim-ts-rainbow",
+    after = {
+      "nvim-treesitter",
     },
-		config = function() require("nvim-treesitter.configs").setup({
-			rainbow = {
-				enable = true,
-				extended_mode = true
-			}}) end
-	}
-	use {
-		"kyazdani42/nvim-tree.lua",
-		requires = {
-      "kyazdani42/nvim-web-devicons",
+    config = function() require("nvim-treesitter.configs").setup({
+      rainbow = {
+        enable = true,
+        extended_mode = true
+      }}) end
+  }
+  use {"kyazdani42/nvim-web-devicons"}
+  use {
+    "kyazdani42/nvim-tree.lua",
+    after = {
+      "nvim-web-devicons",
     },
     config = default_config("nvim-tree"),
-	}
-	use {
-		"nvim-lualine/lualine.nvim",
+  }
+  use {
+    "nvim-lualine/lualine.nvim",
     config = default_config("lualine"),
-	}
-	use {
-		"lewis6991/gitsigns.nvim",
-		requires = {
-      "nvim-lua/plenary.nvim"
+  }
+  use {
+    "lewis6991/gitsigns.nvim",
+    after = {
+      "plenary.nvim",
     },
     config = default_config("gitsigns"),
-	}
-	use {
-		"lukas-reineke/indent-blankline.nvim",
+  }
+  use {
+    "lukas-reineke/indent-blankline.nvim",
     config = default_config("indent_blankline"),
-	}
-	use {
-		"norcalli/nvim-colorizer.lua",
+  }
+  use {
+    "norcalli/nvim-colorizer.lua",
     config = default_config("colorizer"),
-	}
-	use {"ggandor/lightspeed.nvim"}
+  }
+  use {"ggandor/lightspeed.nvim"}
   use {
     "numToStr/Comment.nvim",
     config = default_config("Comment"),
   }
   use {
     "folke/trouble.nvim",
-    requires = {
-      "kyazdani42/nvim-web-devicons"
+    after = {
+      "nvim-web-devicons",
     },
     config = default_config("trouble"),
   }
-	use {
-		"TimUntersberger/neogit",
-		requires = {
-      "nvim-lua/plenary.nvim",
+  use {
+    "TimUntersberger/neogit",
+    after = {
+      "plenary.nvim",
     }
-	}
+  }
   use {
     "tami5/lspsaga.nvim",
     config = default_config("lspsaga"),
   }
   use {
     "akinsho/bufferline.nvim",
-    requires = {
-      "kyazdani42/nvim-web-devicons",
+    after = {
+      "nvim-web-devicons",
     },
-    config = require("bufferline").setup()
+    config = default_config("bufferline")
   }
   use {
     "windwp/nvim-ts-autotag",
+    after = {"nvim-treesitter"},
     config = default_config("nvim-ts-autotag"),
   }
   use {

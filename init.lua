@@ -1,6 +1,8 @@
 local vim = vim
-local opt = vim.opt
+local api = vim.api
 local cmd = vim.cmd
+local fn = vim.fn
+local opt = vim.opt
 
 opt.splitright = true
 opt.splitbelow = true
@@ -13,7 +15,6 @@ opt.colorcolumn = "80"
 opt.completeopt = {"menu", "menuone", "longest", "preview", "noselect"}
 
 opt.mouse = "a"
-
 cmd("filetype plugin indent on")
 opt.expandtab = true
 opt.tabstop = 2
@@ -41,4 +42,14 @@ if string.find(vim.env.ComSpec, "cmd.exe") then
 	opt.shellxquote = ""
 end
 
-require("./plugins")
+if vim.fn.exists("g:vscode") == 1 then
+	api.nvim_set_keymap("x", "gc", "<Plug>VSCodeCommentary", {})
+	api.nvim_set_keymap("n", "gc", "<Plug>VSCodeCommentary", {})
+	api.nvim_set_keymap("o", "gc", "<Plug>VSCodeCommentary", {})
+	api.nvim_set_keymap("n", "gcc", "<Plug>VSCodeCommentaryLine", {})
+end
+
+-- Plugins
+
+require("plugins")
+
