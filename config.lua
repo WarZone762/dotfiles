@@ -31,15 +31,17 @@ opt.undofile = true
 -- opt.t_Co = 256
 opt.termguicolors = true
 
-opt.directory = vim.env.TEMP .. "/nvim//"
-opt.backupdir = vim.env.TEMP .. "/nvim//"
-opt.undodir = vim.env.TEMP .. "/nvim//"
+opt.directory = vim.env.TEMP or "/tmp" .. "/nvim//"
+opt.backupdir = vim.env.TEM or "/tmp" .. "/nvim//"
+opt.undodir = vim.env.TEM or "/tmp" .. "/nvim//"
 
-if string.find(vim.env.ComSpec, "cmd.exe") then
-	opt.shell = "powershell"
-	opt.shellcmdflag = "-Command"
-	opt.shellquote = ""
-	opt.shellxquote = ""
+if vim.env.ComSpec then
+	if string.find(vim.env.ComSpec, "cmd.exe") then
+		opt.shell = "powershell"
+		opt.shellcmdflag = "-Command"
+		opt.shellquote = ""
+		opt.shellxquote = ""
+	end
 end
 
 if vim.fn.exists("g:vscode") == 1 then
