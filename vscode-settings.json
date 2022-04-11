@@ -1,6 +1,6 @@
 {
     "vscode-neovim.neovimExecutablePaths.win32": "D:\\Users\\User\\Programs\\Scoop\\apps\\neovim-nightly\\current\\bin\\nvim.exe",
-    "editor.fontFamily": "'CaskaydiaCove NF', Consolas, 'Courier New', monospace",
+    "editor.fontFamily": "'CaskaydiaCove NF', 'Cascadia Code', Consolas, 'Courier New', monospace",
     "editor.fontLigatures": true,
     "editor.lineNumbers": "relative",
     "editor.rulers": [80, 100, 120],
@@ -13,4 +13,5 @@
     "glualint.linter": "D:\\Users\\User\\Programs\\glualint-1.20.0-Windows\\glualint.exe",
     "Lua.telemetry.enable": false,
     "explorer.confirmDragAndDrop": false,
+    "vscode-neovim.neovimExecutablePaths.linux": "/bin/nvim",
 }
