@@ -3,28 +3,26 @@ require("packer").startup(function(use)
     return "require('" .. plugin_name .. "').setup()"
   end
 
-  local function no_vscode()
-    return vim.fn.exists("g:vscode") == 0
-  end
-
   -- Packer
   use { "wbthomason/packer.nvim" }
 
   -- Vim
+  use { "asvetliakov/vim-easymotion" }
   use { "godlygeek/tabular" }
+  use { "jeetsukumaran/vim-indentwise" }
   use { "kana/vim-textobj-entire" }
   use { "kana/vim-textobj-line" }
   use { "kana/vim-textobj-user" }
   use { "mg979/vim-visual-multi" }
-  use { "terryma/vim-expand-region" }
   use { "michaeljsmith/vim-indent-object" }
+  use { "terryma/vim-expand-region" }
   use { "tpope/vim-abolish" }
   use { "tpope/vim-eunuch" }
   use { "tpope/vim-repeat" }
   use { "tpope/vim-surround" }
   use { "tpope/vim-unimpaired" }
-  use { "wellle/targets.vim" }
   use { "unblevable/quick-scope" }
+  use { "wellle/targets.vim" }
 
   -- Neovim
 
@@ -45,7 +43,6 @@ require("packer").startup(function(use)
   use { "editorconfig/editorconfig-vim" }
   use { "simnalamburt/vim-mundo" }
   use { "tpope/vim-fugitive" }
-  use { "asvetliakov/vim-easymotion" }
 
   -- Neovim
   use {
