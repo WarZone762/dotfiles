@@ -1,20 +1,25 @@
 {
-    "editor.fontFamily": "'CaskaydiaCove NF', 'Cascadia Code', Consolas, 'Courier New', monospace",
-    "editor.fontLigatures": true,
-    "editor.lineNumbers": "relative",
-    "editor.rulers": [80, 100, 120],
-    "editor.tabSize": 2,
-    "editor.quickSuggestions": {
-        "other": true,
-        "comments": true,
-        "strings": true
-    },
-    "explorer.confirmDragAndDrop": false,
-    "security.workspace.trust.untrustedFiles": "open",
-    "git.autofetch": true,
-    "Lua.telemetry.enable": false,
-    "glualint.linter": "D:\\Users\\User\\Programs\\glualint-1.20.0-Windows\\glualint.exe",
-    "python.analysis.typeCheckingMode": "strict",
-    "vscode-neovim.neovimExecutablePaths.linux": "/bin/nvim",
-    "vscode-neovim.neovimExecutablePaths.win32": "nvim"
+  "editor.fontFamily": "'CaskaydiaCove NF', 'Cascadia Code', Consolas, 'Courier New', monospace",
+  "editor.fontLigatures": true,
+  "editor.guides.bracketPairs": true,
+  "editor.lineNumbers": "relative",
+  "editor.rulers": [
+    80,
+    100,
+    120
+  ],
+  "editor.tabSize": 2,
+  "editor.quickSuggestions": {
+    "other": true,
+    "comments": true,
+    "strings": true
+  },
+  "explorer.confirmDragAndDrop": false,
+  "security.workspace.trust.untrustedFiles": "open",
+  "git.autofetch": true,
+  "Lua.telemetry.enable": false,
+  "glualint.linter": "D:\\Users\\User\\Programs\\glualint-1.20.0-Windows\\glualint.exe",
+  "python.analysis.typeCheckingMode": "strict",
+  "vscode-neovim.neovimExecutablePaths.linux": "/bin/nvim",
+  "vscode-neovim.neovimExecutablePaths.win32": "nvim"
 }

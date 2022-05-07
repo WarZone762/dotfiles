@@ -1,4 +1,3 @@
-local vim = vim
 local api = vim.api
 local cmd = vim.cmd
 local fn = vim.fn
@@ -12,7 +11,7 @@ opt.relativenumber = true
 opt.signcolumn = "yes"
 opt.colorcolumn = "80"
 
-opt.completeopt = {"menu", "menuone", "longest", "preview", "noselect"}
+opt.completeopt = { "menu", "menuone", "longest", "preview", "noselect" }
 
 opt.mouse = "a"
 cmd("filetype plugin indent on")
@@ -31,9 +30,9 @@ opt.undofile = true
 -- opt.t_Co = 256
 opt.termguicolors = true
 
-opt.directory = vim.env.TEMP or "/tmp" .. "/nvim//"
-opt.backupdir = vim.env.TEM or "/tmp" .. "/nvim//"
-opt.undodir = vim.env.TEM or "/tmp" .. "/nvim//"
+opt.directory = vim.env.TEMP or ("/tmp" .. "/nvim//")
+opt.backupdir = vim.env.TEM or ("/tmp" .. "/nvim//")
+opt.undodir = vim.env.TEM or ("/tmp" .. "/nvim//")
 
 if vim.env.ComSpec then
 	if string.find(vim.env.ComSpec, "cmd.exe") then
@@ -57,4 +56,3 @@ end
 -- Plugins
 
 require("plugins")
-
