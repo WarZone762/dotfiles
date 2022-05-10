@@ -17,7 +17,6 @@ require("packer").startup(function(use)
   use { "michaeljsmith/vim-indent-object" }
   use { "terryma/vim-expand-region" }
   use { "tpope/vim-abolish" }
-  use { "tpope/vim-eunuch" }
   use { "tpope/vim-repeat" }
   use { "tpope/vim-surround" }
   use { "tpope/vim-unimpaired" }
@@ -42,6 +41,7 @@ require("packer").startup(function(use)
   -- Vim
   use { "editorconfig/editorconfig-vim" }
   use { "simnalamburt/vim-mundo" }
+  use { "tpope/vim-eunuch" }
   use { "tpope/vim-fugitive" }
 
   -- Neovim

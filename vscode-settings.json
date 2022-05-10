@@ -16,12 +16,13 @@
   },
   "explorer.confirmDragAndDrop": false,
   "security.workspace.trust.untrustedFiles": "open",
+  "C_Cpp.clang_format_fallbackStyle": "Google",
+  "C_Cpp.codeAnalysis.clangTidy.enabled": true,
   "git.autofetch": true,
-  "Lua.telemetry.enable": false,
+  "gitlens.codeLens.enabled": false,
   "glualint.linter": "D:\\Users\\User\\Programs\\glualint-1.20.0-Windows\\glualint.exe",
+  "Lua.telemetry.enable": false,
   "python.analysis.typeCheckingMode": "strict",
   "vscode-neovim.neovimExecutablePaths.linux": "/bin/nvim",
-  "vscode-neovim.neovimExecutablePaths.win32": "nvim",
-  "C_Cpp.clang_format_fallbackStyle": "Google",
-  "C_Cpp.codeAnalysis.clangTidy.enabled": true
+  "vscode-neovim.neovimExecutablePaths.win32": "nvim"
 }
