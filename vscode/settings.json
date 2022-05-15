@@ -24,5 +24,6 @@
   "Lua.telemetry.enable": false,
   "python.analysis.typeCheckingMode": "strict",
   "vscode-neovim.neovimExecutablePaths.linux": "/bin/nvim",
-  "vscode-neovim.neovimExecutablePaths.win32": "nvim"
+  "vscode-neovim.neovimExecutablePaths.win32": "nvim",
+  "editor.formatOnSave": true
 }

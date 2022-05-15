@@ -13,6 +13,7 @@ require("packer").startup(function(use)
   use { "kana/vim-textobj-entire" }
   use { "kana/vim-textobj-line" }
   use { "kana/vim-textobj-user" }
+  use { "matze/vim-move" }
   use { "mg979/vim-visual-multi" }
   use { "michaeljsmith/vim-indent-object" }
   use { "terryma/vim-expand-region" }
