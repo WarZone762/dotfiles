@@ -1,6 +1,7 @@
 {
   "editor.fontFamily": "'CaskaydiaCove NF', 'Cascadia Code', Consolas, 'Courier New', monospace",
   "editor.fontLigatures": true,
+  "editor.formatOnSave": true,
   "editor.guides.bracketPairs": true,
   "editor.lineNumbers": "relative",
   "editor.rulers": [
@@ -15,6 +16,7 @@
     "strings": true
   },
   "explorer.confirmDragAndDrop": false,
+  "files.trimTrailingWhitespace": true,
   "security.workspace.trust.untrustedFiles": "open",
   "C_Cpp.clang_format_fallbackStyle": "Google",
   "C_Cpp.codeAnalysis.clangTidy.enabled": true,
@@ -24,6 +26,5 @@
   "Lua.telemetry.enable": false,
   "python.analysis.typeCheckingMode": "strict",
   "vscode-neovim.neovimExecutablePaths.linux": "/bin/nvim",
-  "vscode-neovim.neovimExecutablePaths.win32": "nvim",
-  "editor.formatOnSave": true
+  "vscode-neovim.neovimExecutablePaths.win32": "nvim"
 }
