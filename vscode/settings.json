@@ -4,6 +4,7 @@
   "editor.formatOnSave": true,
   "editor.guides.bracketPairs": true,
   "editor.lineNumbers": "relative",
+  "editor.maxTokenizationLineLength": 60000,
   "editor.rulers": [
     80,
     100,
@@ -26,5 +27,8 @@
   "Lua.telemetry.enable": false,
   "python.analysis.typeCheckingMode": "strict",
   "vscode-neovim.neovimExecutablePaths.linux": "/bin/nvim",
-  "vscode-neovim.neovimExecutablePaths.win32": "nvim"
+  "vscode-neovim.neovimExecutablePaths.win32": "nvim",
+  "javascript.format.semicolons": "insert",
+  "javascript.preferences.quoteStyle": "double",
+  "typescript.surveys.enabled": false
 }
