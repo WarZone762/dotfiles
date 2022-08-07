@@ -19,16 +19,32 @@
   "explorer.confirmDragAndDrop": false,
   "files.trimTrailingWhitespace": true,
   "security.workspace.trust.untrustedFiles": "open",
+  "terminal.integrated.profiles.windows": {
+    "MinGW64": {
+      "path": "bash",
+      "args": [
+        "--login",
+        "-i"
+      ],
+      "env": {
+        "MSYSTEM": "MINGW64",
+        "CHERE_INVOKING": "1",
+        "MSYS2_PATH_TYPE": "inherit"
+      },
+      "icon": "terminal-bash"
+    }
+  },
+  "terminal.integrated.defaultProfile.windows": "MinGW64",
   "C_Cpp.clang_format_fallbackStyle": "Google",
   "C_Cpp.codeAnalysis.clangTidy.enabled": true,
+  "Lua.telemetry.enable": false,
   "git.autofetch": true,
   "gitlens.codeLens.enabled": false,
   "glualint.linter": "D:\\Users\\User\\Programs\\glualint-1.20.0-Windows\\glualint.exe",
-  "Lua.telemetry.enable": false,
-  "python.analysis.typeCheckingMode": "strict",
-  "vscode-neovim.neovimExecutablePaths.linux": "/bin/nvim",
-  "vscode-neovim.neovimExecutablePaths.win32": "nvim",
   "javascript.format.semicolons": "insert",
   "javascript.preferences.quoteStyle": "double",
-  "typescript.surveys.enabled": false
+  "python.analysis.typeCheckingMode": "strict",
+  "typescript.surveys.enabled": false,
+  "vscode-neovim.neovimExecutablePaths.linux": "/bin/nvim",
+  "vscode-neovim.neovimExecutablePaths.win32": "nvim"
 }
