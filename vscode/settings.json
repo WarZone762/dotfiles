@@ -20,8 +20,8 @@
   "files.trimTrailingWhitespace": true,
   "security.workspace.trust.untrustedFiles": "open",
   "terminal.integrated.profiles.windows": {
-    "MinGW64": {
-      "path": "bash",
+    "MinGW64 zsh": {
+      "path": "zsh",
       "args": [
         "--login",
         "-i"
@@ -34,7 +34,7 @@
       "icon": "terminal-bash"
     }
   },
-  "terminal.integrated.defaultProfile.windows": "MinGW64",
+  "terminal.integrated.defaultProfile.windows": "MinGW64 zsh",
   "C_Cpp.clang_format_fallbackStyle": "Google",
   "C_Cpp.codeAnalysis.clangTidy.enabled": true,
   "Lua.telemetry.enable": false,
