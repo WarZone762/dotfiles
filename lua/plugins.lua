@@ -8,6 +8,7 @@ require("packer").startup(function(use)
 
   -- Vim
   use { "asvetliakov/vim-easymotion" }
+  use { "chaoren/vim-wordmotion" }
   use { "godlygeek/tabular" }
   use { "jeetsukumaran/vim-indentwise" }
   use { "kana/vim-textobj-entire" }
