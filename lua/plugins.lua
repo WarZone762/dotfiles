@@ -8,7 +8,6 @@ require("packer").startup(function(use)
 
   -- Vim
   use { "asvetliakov/vim-easymotion" }
-  use { "chaoren/vim-wordmotion" }
   use { "godlygeek/tabular" }
   use { "jeetsukumaran/vim-indentwise" }
   use { "kana/vim-textobj-entire" }
@@ -163,21 +162,21 @@ require("packer").startup(function(use)
     },
     config = function() require("nvim-lsp-installer").on_server_ready(
         function(server)
-        local function on_attach(client, bufnr)
-          require("illuminate").on_attach(client)
+          local function on_attach(client, bufnr)
+            require("illuminate").on_attach(client)
+          end
+
+          local capabilities = require("cmp_nvim_lsp").update_capabilities(
+            vim.lsp.protocol.make_client_capabilities()
+          )
+
+          local opts = {
+            on_attach = on_attach,
+            capabilities = capabilities,
+          }
+
+          server:setup(opts)
         end
-
-        local capabilities = require("cmp_nvim_lsp").update_capabilities(
-          vim.lsp.protocol.make_client_capabilities()
-        )
-
-        local opts = {
-          on_attach = on_attach,
-          capabilities = capabilities,
-        }
-
-        server:setup(opts)
-      end
       )
     end
   }
@@ -208,7 +207,8 @@ require("packer").startup(function(use)
         rainbow = {
           enable = true,
           extended_mode = true
-        } })
+        }
+      })
     end
   }
   use { "kyazdani42/nvim-web-devicons" }

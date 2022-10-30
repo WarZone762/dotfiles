@@ -1,5 +1,5 @@
 {
-  "editor.fontFamily": "'CaskaydiaCove NF', 'Cascadia Code', Consolas, 'Courier New', monospace",
+  "editor.fontFamily": "'CaskaydiaCove NF Mono', 'Cascadia Code', Consolas, 'Courier New', monospace",
   "editor.fontLigatures": true,
   "editor.formatOnSave": true,
   "editor.guides.bracketPairs": true,
@@ -18,6 +18,7 @@
   },
   "explorer.confirmDragAndDrop": false,
   "files.trimTrailingWhitespace": true,
+  "files.eol": "\n",
   "security.workspace.trust.untrustedFiles": "open",
   "terminal.integrated.profiles.windows": {
     "MinGW64 zsh": {
@@ -32,11 +33,23 @@
         "MSYS2_PATH_TYPE": "inherit"
       },
       "icon": "terminal-bash"
+    },
+    "MinGW64 zsh --no-rcs": {
+      "path": "zsh",
+      "args": [
+        "--login",
+        "-i",
+        "--no-rcs"
+      ],
+      "env": {
+        "MSYSTEM": "MINGW64",
+        "CHERE_INVOKING": "1",
+        "MSYS2_PATH_TYPE": "inherit"
+      },
+      "icon": "terminal-bash"
     }
   },
   "terminal.integrated.defaultProfile.windows": "MinGW64 zsh",
-  "C_Cpp.clang_format_fallbackStyle": "Google",
-  "C_Cpp.codeAnalysis.clangTidy.enabled": true,
   "Lua.telemetry.enable": false,
   "git.autofetch": true,
   "gitlens.codeLens.enabled": false,
@@ -44,7 +57,74 @@
   "javascript.format.semicolons": "insert",
   "javascript.preferences.quoteStyle": "double",
   "python.analysis.typeCheckingMode": "strict",
+  "python.formatting.autopep8Args": [
+    "--aggressive",
+    "--aggressive",
+    "--indent-size=2",
+    "--max-line-length=80"
+  ],
   "typescript.surveys.enabled": false,
   "vscode-neovim.neovimExecutablePaths.linux": "/bin/nvim",
-  "vscode-neovim.neovimExecutablePaths.win32": "nvim"
+  "vscode-neovim.neovimExecutablePaths.win32": "nvim",
+  "vscode-neovim.highlightGroups.ignoreHighlights": [],
+  "sc2galaxy.dataPath": "D:\\Users\\User\\Programs\\Battle.net Games\\StarCraft II\\Mods\\SC2GameData",
+  "C_Cpp.codeAnalysis.clangTidy.enabled": true,
+  "C_Cpp.clang_format_fallbackStyle": "Google",
+  "C_Cpp.codeAnalysis.clangTidy.checks.enabled": [
+    "bugprone-*",
+    "cert-*",
+    "clang-analyzer-*",
+    "cppcoreguidelines-*",
+    "llvm-*",
+    "misc-*",
+    "modernize-*",
+    "performance-*",
+    "readability-*"
+  ],
+  "C_Cpp.codeAnalysis.clangTidy.checks.disabled": [
+    "bugprone-easily-swappable-parameters",
+    "bugprone-narrowing-conversions",
+    "bugprone-reserved-identifier",
+    "bugprone-suspicious-string-compare",
+    "cert-dcl37-c",
+    "cert-dcl51-cpp",
+    "cert-dcl58-cpp",
+    "cert-err33-c",
+    "cppcoreguidelines-avoid-c-arrays",
+    "cppcoreguidelines-avoid-goto",
+    "cppcoreguidelines-avoid-magic-numbers",
+    "cppcoreguidelines-avoid-non-const-global-variables",
+    "cppcoreguidelines-init-variables",
+    "cppcoreguidelines-macro-usage",
+    "cppcoreguidelines-narrowing-conversions",
+    "cppcoreguidelines-no-malloc",
+    "cppcoreguidelines-owning-memory",
+    "cppcoreguidelines-pro-bounds-array-to-pointer-decay",
+    "cppcoreguidelines-pro-bounds-constant-array-index",
+    "cppcoreguidelines-pro-bounds-pointer-arithmetic",
+    "cppcoreguidelines-pro-type-cstyle-cast",
+    "cppcoreguidelines-pro-type-member-init",
+    "cppcoreguidelines-pro-type-vararg",
+    "llvm-header-guard",
+    "llvm-include-order",
+    "modernize-avoid-c-arrays",
+    "modernize-concat-nested-namespaces",
+    "modernize-deprecated-headers",
+    "modernize-loop-convert",
+    "modernize-macro-to-enum",
+    "modernize-use-nodiscard",
+    "modernize-use-nullptr",
+    "modernize-use-trailing-return-type",
+    "performance-no-int-to-ptr",
+    "readability-braces-around-statements",
+    "readability-identifier-length",
+    "readability-isolate-declaration",
+    "readability-magic-numbers",
+    "readability-simplify-boolean-expr"
+  ],
+  "C_Cpp.codeAnalysis.clangTidy.path": "D:\\Users\\User\\Programs\\Scoop\\apps\\msys2\\current\\mingw64\\bin\\clang-tidy.exe",
+  "rust-analyzer.rustfmt.extraArgs": [
+    "--config",
+    "tab_spaces=2"
+  ]
 }
