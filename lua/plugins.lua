@@ -14,7 +14,6 @@ require("packer").startup(function(use)
   use { "kana/vim-textobj-line" }
   use { "kana/vim-textobj-user" }
   use { "matze/vim-move" }
-  use { "mg979/vim-visual-multi" }
   use { "michaeljsmith/vim-indent-object" }
   use { "terryma/vim-expand-region" }
   use { "tpope/vim-abolish" }
@@ -41,6 +40,7 @@ require("packer").startup(function(use)
 
   -- Vim
   use { "editorconfig/editorconfig-vim" }
+  use { "mg979/vim-visual-multi" }
   use { "simnalamburt/vim-mundo" }
   use { "tpope/vim-eunuch" }
   use { "tpope/vim-fugitive" }

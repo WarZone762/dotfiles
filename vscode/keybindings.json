@@ -20,7 +20,11 @@
   },
   {
     "key": "ctrl+n",
-    "command": "workbench.action.files.newUntitledFile",
-    "when": "false"
+    "command": "-workbench.action.files.newUntitledFile",
+  },
+  {
+    "key": "ctrl+n",
+    "command": "editor.action.addSelectionToNextFindMatch",
+    "when": "editorFocus"
   }
 ]

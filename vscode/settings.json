@@ -21,6 +21,19 @@
   "files.eol": "\n",
   "security.workspace.trust.untrustedFiles": "open",
   "terminal.integrated.profiles.windows": {
+    "MinGW64 bash": {
+      "path": "bash",
+      "args": [
+        "--login",
+        "-i"
+      ],
+      "env": {
+        "MSYSTEM": "MINGW64",
+        "CHERE_INVOKING": "1",
+        "MSYS2_PATH_TYPE": "inherit"
+      },
+      "icon": "terminal-bash"
+    },
     "MinGW64 zsh": {
       "path": "zsh",
       "args": [
@@ -49,7 +62,7 @@
       "icon": "terminal-bash"
     }
   },
-  "terminal.integrated.defaultProfile.windows": "MinGW64 zsh",
+  "terminal.integrated.defaultProfile.windows": "MinGW64 bash",
   "Lua.telemetry.enable": false,
   "git.autofetch": true,
   "gitlens.codeLens.enabled": false,
