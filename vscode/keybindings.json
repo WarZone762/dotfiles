@@ -23,7 +23,7 @@
     "command": "-workbench.action.files.newUntitledFile",
   },
   {
-    "key": "ctrl+n",
+    "key": "ctrl+shift+n",
     "command": "editor.action.addSelectionToNextFindMatch",
     "when": "editorFocus"
   }
