@@ -19,6 +19,7 @@
     "git.autofetch": true,
     "gitlens.codeLens.enabled": false,
     "security.workspace.trust.untrustedFiles": "open",
+    "terminal.integrated.minimumContrastRatio": 1,
     "terminal.integrated.profiles.windows": {
         "MinGW64 bash": {
             "path": "${env:USERPROFILE}/apps/Scoop/apps/msys2/current/usr/bin/bash.exe",
@@ -34,16 +35,19 @@
     "terminal.integrated.defaultProfile.windows": "MinGW64 bash",
     "workbench.colorTheme": "Visual Studio Dark - C++",
     "workbench.iconTheme": "material-icon-theme",
-    "[typescript]": {
+    "[javascript]": {
         "editor.defaultFormatter": "esbenp.prettier-vscode"
     },
-    "[javascript]": {
+    "[json]": {
         "editor.defaultFormatter": "esbenp.prettier-vscode"
     },
     "[jsonc]": {
         "editor.defaultFormatter": "esbenp.prettier-vscode"
     },
-    "[json]": {
+    "[python]": {
+        "editor.formatOnType": true
+    },
+    "[typescript]": {
         "editor.defaultFormatter": "esbenp.prettier-vscode"
     },
     "C_Cpp.codeAnalysis.clangTidy.enabled": true,
@@ -107,9 +111,12 @@
     "color-highlight.markerType": "underline",
     "coverage-gutters.showLineCoverage": true,
     "glualint.linter": "D:\\Users\\User\\Programs\\glualint-1.20.0-Windows\\glualint.exe",
+    "Lua.diagnostics.neededFileStatus": {
+        "codestyle-check": "Any"
+    },
     "Lua.format.defaultConfig": {
         "max_line_length": "100",
-        "trailing_table_separator": "always",
+        "trailing_table_separator": "smart",
         "quote_style": "double"
     },
     "Lua.hint.enable": true,
@@ -147,9 +154,5 @@
     "typescript.surveys.enabled": false,
     "vscode-neovim.highlightGroups.ignoreHighlights": [],
     "vscode-neovim.neovimExecutablePaths.linux": "/bin/nvim",
-    "vscode-neovim.neovimExecutablePaths.win32": "nvim",
-    "[python]": {
-        "editor.formatOnType": true
-    },
-    "terminal.integrated.minimumContrastRatio": 1
+    "vscode-neovim.neovimExecutablePaths.win32": "nvim"
 }
