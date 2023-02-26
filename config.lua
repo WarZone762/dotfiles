@@ -9,7 +9,7 @@ opt.splitbelow = true
 opt.number = true
 opt.relativenumber = true
 opt.signcolumn = "yes"
-opt.colorcolumn = "80"
+opt.colorcolumn = "100"
 
 opt.completeopt = { "menu", "menuone", "longest", "preview", "noselect", }
 
@@ -65,7 +65,7 @@ if not vim.loop.fs_stat(lazypath) then
         "clone",
         "--filter=blob:none",
         "https://github.com/folke/lazy.nvim.git",
-        "--branch=stable", -- latest stable release
+        "--branch=stable",
         lazypath,
     })
 end
@@ -79,9 +79,13 @@ local plugins = {
     "asvetliakov/vim-easymotion",
     "godlygeek/tabular",
     "jeetsukumaran/vim-indentwise",
-    "kana/vim-textobj-entire",
-    "kana/vim-textobj-line",
-    "kana/vim-textobj-user",
+    {
+        "kana/vim-textobj-user",
+        dependencies = {
+            "kana/vim-textobj-entire",
+            "kana/vim-textobj-line",
+        },
+    },
     "matze/vim-move",
     "michaeljsmith/vim-indent-object",
     "terryma/vim-expand-region",
@@ -104,31 +108,39 @@ local non_vscode_plugins = {
     "tpope/vim-fugitive",
 
     -- Neovim
-    "windwp/nvim-autopairs",
-
-    "hrsh7th/cmp-buffer",
-    "hrsh7th/cmp-cmdline",
-    "hrsh7th/cmp-nvim-lsp",
-    "hrsh7th/cmp-path",
     "L3MON4D3/LuaSnip",
-    "saadparwaiz1/cmp_luasnip",
+    "RRethy/vim-illuminate",
+    "TimUntersberger/neogit",
+    "ggandor/lightspeed.nvim",
+    "kyazdani42/nvim-web-devicons",
+    "liuchengxu/vista.vim",
+    "mfussenegger/nvim-dap",
+    "neovim/nvim-lspconfig",
+    "nvim-lua/plenary.nvim",
+    "nvim-telescope/telescope.nvim",
+
+    { "akinsho/bufferline.nvim", config = true, },
+    { "folke/trouble.nvim", config = true, },
+    { "kyazdani42/nvim-tree.lua", config = true, },
+    { "lewis6991/gitsigns.nvim", config = true, },
+    { "lukas-reineke/indent-blankline.nvim", config = true, },
+    { "numToStr/Comment.nvim", config = true, },
+    { "nvim-lualine/lualine.nvim", config = true, },
+    { "ray-x/lsp_signature.nvim", config = true, },
+    { "tami5/lspsaga.nvim", config = true, },
+    { "windwp/nvim-autopairs", config = true, },
+    { "windwp/nvim-ts-autotag", config = true, },
+
     {
         "hrsh7th/nvim-cmp",
         dependencies = {
-            "cmp-buffer",
-            "cmp-cmdline",
-            "cmp-nvim-lsp",
-            "cmp-path",
-            "cmp_luasnip",
+            "hrsh7th/cmp-buffer",
+            "hrsh7th/cmp-cmdline",
+            "hrsh7th/cmp-nvim-lsp",
+            "hrsh7th/cmp-path",
+            "saadparwaiz1/cmp_luasnip",
         },
         config = function()
-            local has_words_before = function()
-                local line, col = table.unpack(vim.api.nvim_win_get_cursor(0))
-                return col ~= 0 and vim.api.nvim_buf_get_lines(
-                    0, line - 1, line, true
-                )[1]:sub(col, col):match("%s") == nil
-            end
-
             local luasnip = require("luasnip")
             local cmp = require("cmp")
 
@@ -138,58 +150,48 @@ local non_vscode_plugins = {
                         require("luasnip").lsp_expand(args.body)
                     end,
                 },
-                mapping = {
-                    ["<C-b>"] = cmp.mapping(cmp.mapping.scroll_docs(-4), { "i", "c", }),
-                    ["<C-f>"] = cmp.mapping(cmp.mapping.scroll_docs(4), { "i", "c", }),
-                    ["<C-Space>"] = cmp.mapping(cmp.mapping.complete(), { "i", "c", }),
-                    ["<C-y>"] = cmp.config.disable,
-                    ["<C-e>"] = cmp.mapping({
-                        i = cmp.mapping.abort(),
-                        c = cmp.mapping.close(),
-                    }),
-                    ["<CR>"] = cmp.mapping.confirm({ select = true, }),
 
+                mapping = cmp.mapping.preset.insert({
+                    ["<C-b>"] = cmp.mapping.scroll_docs(-4),
+                    ["<C-f>"] = cmp.mapping.scroll_docs(4),
+                    ["<C-Space>"] = cmp.mapping.complete(), -- TODO: doesn't work
+                    ["<C-e>"] = cmp.mapping.abort(),
+                    ["<CR>"] = cmp.mapping.confirm({ select = true, }),
                     ["<Tab>"] = cmp.mapping(function(fallback)
                         if cmp.visible() then
-                            cmp.select_next_item()
+                            cmp.confirm({ select = true, })
                         elseif luasnip.expand_or_jumpable() then
                             luasnip.expand_or_jump()
-                        elseif has_words_before() then
-                            cmp.complete()
                         else
                             fallback()
                         end
-                    end, { "i", "s", }),
-
-                    ["<S-Tab>"] = cmp.mapping(function(fallback)
-                        if cmp.visible() then
-                            cmp.select_prev_item()
-                        elseif luasnip.jumpable(-1) then
+                    end),
+                    ["<S-Tab>"] = cmp.mapping(function()
+                        if luasnip.jumpable(-1) then
                             luasnip.jump(-1)
                         else
-                            fallback()
+                            cmp.complete()
                         end
-                    end, { "i", "s", }),
-                },
+                    end),
+                }),
+
                 sources = cmp.config.sources({
                     { name = "nvim_lsp", },
                     { name = "luasnip", },
                 }, {
                     { name = "buffer", },
                 }),
-
-                experimental = {
-                    ghost_text = true,
-                },
             })
 
-            cmp.setup.cmdline("/", {
+            cmp.setup.cmdline({ "/", "?", }, {
+                mapping = cmp.mapping.preset.cmdline(),
                 sources = {
                     { name = "buffer", },
                 },
             })
 
             cmp.setup.cmdline(":", {
+                mapping = cmp.mapping.preset.cmdline(),
                 sources = cmp.config.sources({
                     { name = "path", },
                 }, {
@@ -198,39 +200,36 @@ local non_vscode_plugins = {
             })
         end,
     },
-    "RRethy/vim-illuminate",
-    "neovim/nvim-lspconfig",
-    {
-        "williamboman/nvim-lsp-installer",
-        config = function() require("nvim-lsp-installer").on_server_ready(
-                function(server)
-                    local function on_attach(client, bufnr)
-                        require("illuminate").on_attach(client)
-                    end
 
-                    local capabilities = require("cmp_nvim_lsp").update_capabilities(
-                        vim.lsp.protocol.make_client_capabilities()
-                    )
-
-                    local opts = {
-                        on_attach = on_attach,
-                        capabilities = capabilities,
-                    }
-
-                    server:setup(opts)
-                end
-            )
-        end,
-    },
     {
         "nvim-treesitter/nvim-treesitter",
         config = function() require("nvim-treesitter.configs").setup({
-                -- ensure_installed = "maintained",
+                ensure_installed = "all",
                 highlight = { enable = true, },
             })
         end,
         build = ":TSUpdate",
     },
+
+    {
+        "williamboman/mason.nvim",
+        dependencies = {
+            "nvim-lspconfig",
+            {
+                "williamboman/mason-lspconfig.nvim",
+                config = function()
+                    require("mason-lspconfig").setup()
+                    require("mason-lspconfig").setup_handlers {
+                        function(server_name)
+                            require("lspconfig")[server_name].setup {}
+                        end,
+                    }
+                end,
+            },
+        },
+        config = true,
+    },
+
     {
         "p00f/nvim-ts-rainbow",
         config = function() require("nvim-treesitter.configs").setup({
@@ -241,24 +240,6 @@ local non_vscode_plugins = {
             })
         end,
     },
-    "mfussenegger/nvim-dap",
-    "nvim-lua/plenary.nvim",
-    "nvim-telescope/telescope.nvim",
-    "liuchengxu/vista.vim",
-    "kyazdani42/nvim-web-devicons",
-    "kyazdani42/nvim-tree.lua",
-    "folke/trouble.nvim",
-    "akinsho/bufferline.nvim",
-    "nvim-lualine/lualine.nvim",
-    "lewis6991/gitsigns.nvim",
-    "lukas-reineke/indent-blankline.nvim",
-    "norcalli/nvim-colorizer.lua",
-    "ggandor/lightspeed.nvim",
-    "numToStr/Comment.nvim",
-    "TimUntersberger/neogit",
-    "tami5/lspsaga.nvim",
-    "windwp/nvim-ts-autotag",
-    "ray-x/lsp_signature.nvim",
 
     {
         "marko-cerovac/material.nvim",
