@@ -23,6 +23,7 @@ return {
     { "kyazdani42/nvim-tree.lua", config = true },
     { "lewis6991/gitsigns.nvim", config = true },
     { "lukas-reineke/indent-blankline.nvim", config = true },
+    { "numToStr/Comment.nvim", config = true },
     { "nvim-lualine/lualine.nvim", config = true },
     { "ray-x/lsp_signature.nvim", config = true },
     { "stevearc/overseer.nvim", config = true },

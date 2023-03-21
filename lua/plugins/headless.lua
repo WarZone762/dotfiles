@@ -21,7 +21,6 @@ return {
 
     -- Neovim
     { "kylechui/nvim-surround", config = true },
-    { "numToStr/Comment.nvim", config = true },
 
     {
         "ggandor/leap.nvim",

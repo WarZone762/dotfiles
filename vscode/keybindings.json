@@ -1,30 +1,30 @@
 // Place your key bindings in this file to override the defaultsauto[]
 [
-  {
-    "key": "ctrl+n",
-    "command": "vscode-neovim.send",
-    "when": "editorTextFocus && neovim.ctrlKeysNormal && neovim.init && neovim.mode != 'insert'",
-    "args": "<C-n>"
-  },
-  {
-    "key": "alt+k",
-    "command": "vscode-neovim.send",
-    "when": "editorTextFocus && neovim.ctrlKeysNormal && neovim.init",
-    "args": "<A-k>"
-  },
-  {
-    "key": "alt+j",
-    "command": "vscode-neovim.send",
-    "when": "editorTextFocus && neovim.ctrlKeysNormal && neovim.init",
-    "args": "<A-j>"
-  },
-  {
-    "key": "ctrl+n",
-    "command": "-workbench.action.files.newUntitledFile",
-  },
-  {
-    "key": "ctrl+shift+n",
-    "command": "editor.action.addSelectionToNextFindMatch",
-    "when": "editorFocus"
-  }
+    {
+        "key": "ctrl+n",
+        "command": "vscode-neovim.send",
+        "when": "editorTextFocus && neovim.ctrlKeysNormal && neovim.init && neovim.mode != 'insert'",
+        "args": "<C-n>"
+    },
+    {
+        "key": "alt+k",
+        "command": "vscode-neovim.send",
+        "when": "editorTextFocus && neovim.ctrlKeysNormal && neovim.init",
+        "args": "<A-k>"
+    },
+    {
+        "key": "alt+j",
+        "command": "vscode-neovim.send",
+        "when": "editorTextFocus && neovim.ctrlKeysNormal && neovim.init",
+        "args": "<A-j>"
+    },
+    {
+        "key": "ctrl+n",
+        "command": "-workbench.action.files.newUntitledFile"
+    },
+    {
+        "key": "ctrl+shift+n",
+        "command": "editor.action.addSelectionToNextFindMatch",
+        "when": "editorFocus"
+    }
 ]

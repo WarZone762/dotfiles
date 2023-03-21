@@ -1,5 +1,6 @@
 local cmd = vim.cmd
 local env = vim.env
+local keymap = vim.keymap
 local opt = vim.opt
 
 opt.splitright = true
@@ -39,4 +40,9 @@ if env.ComSpec then
         opt.shellquote = ""
         opt.shellxquote = ""
     end
+end
+
+if vim.g.vscode then
+    keymap.set({ "n", "o", "x" }, "gc", "<Plug>VSCodeCommentary", {})
+    keymap.set("n", "gcc", "<Plug>VSCodeCommentaryLine", {})
 end
