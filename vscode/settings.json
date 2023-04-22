@@ -111,6 +111,7 @@
     "color-highlight.markerType": "underline",
     "coverage-gutters.showLineCoverage": true,
     "cwtools.cache.eu4": "d:\\Users\\User\\Programs\\Scoop\\persist\\steam\\steamapps\\common\\Europa Universalis IV",
+    "errorLens.enabledDiagnosticLevels": ["error", "warning", "info", "hint"],
     "glualint.linter": "D:\\Users\\User\\Programs\\glualint-1.20.0-Windows\\glualint.exe",
     "Lua.diagnostics.neededFileStatus": {
         "codestyle-check": "Any"
