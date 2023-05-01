@@ -1,6 +1,6 @@
 #include QMK_KEYBOARD_H
 
-enum custom_keycodes {
+enum {
     REPEAT_M1 = SAFE_RANGE,
     REPEAT_M2,
 };
