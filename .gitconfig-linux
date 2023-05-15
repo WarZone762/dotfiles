@@ -1,0 +1,9 @@
+[user]
+	email = uzi1m1@gmail.com
+	name = WarZone762
+
+[credential]
+	helper = /usr/bin/git-credential-manager-core
+	credentialStore = secretservice
+[credential "https://dev.azure.com"]
+	useHttpPath = true
