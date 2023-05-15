@@ -1,5 +1,6 @@
 out/
 lazy-lock.json
 
+.histfile
 .zcompdump
 
