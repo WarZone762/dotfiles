@@ -1,5 +1,6 @@
 local cmd = vim.cmd
 local env = vim.env
+local fn = vim.fn
 local keymap = vim.keymap
 local opt = vim.opt
 
@@ -29,9 +30,15 @@ opt.termguicolors = true
 opt.backup = true
 opt.undofile = true
 
-opt.directory = env.TMP or opt.directory
-opt.backupdir = env.TMP or opt.backupdir
-opt.undodir = env.TMP or opt.undodir
+if fn.has("unix") then
+    opt.directory = "/tmp"
+    opt.backupdir = "/tmp"
+    opt.undodir = "/tmp"
+else
+    opt.directory = env.TMP or opt.directory
+    opt.backupdir = env.TMP or opt.backupdir
+    opt.undodir = env.TMP or opt.undodir
+end
 
 if env.ComSpec then
     if string.find(env.ComSpec, "cmd.exe") then
