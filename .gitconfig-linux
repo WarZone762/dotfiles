@@ -3,7 +3,7 @@
 	name = WarZone762
 
 [credential]
-	helper = /usr/bin/git-credential-manager-core
+	helper = /usr/bin/git-credential-manager
 	credentialStore = secretservice
 [credential "https://dev.azure.com"]
 	useHttpPath = true

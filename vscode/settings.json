@@ -1,5 +1,5 @@
 {
-    "editor.fontFamily": "'CaskaydiaCove NF Mono', 'Cascadia Code', Consolas, 'Courier New', monospace",
+    "editor.fontFamily": "'CaskaydiaCove NF Mono', 'CaskaydiaCove Nerd Font', 'Cascadia Code', Consolas, 'Courier New', monospace",
     "editor.fontLigatures": true,
     "editor.formatOnSave": true,
     "editor.guides.bracketPairs": true,

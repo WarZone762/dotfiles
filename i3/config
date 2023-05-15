@@ -196,7 +196,7 @@ gaps inner 5px
 gaps outer 5px
 smart_gaps on
 
-font pango:CaskaydiaCove Nerd Font Mono 10
+font pango:CaskaydiaCove Nerd Font 10
 
 exec /usr/lib/polkit-kde-authentication-agent-1
 

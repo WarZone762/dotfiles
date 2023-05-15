@@ -27,9 +27,10 @@ return {
     { "nvim-lualine/lualine.nvim", config = true },
     { "ray-x/lsp_signature.nvim", config = true },
     { "stevearc/overseer.nvim", config = true },
-    { "tami5/lspsaga.nvim", config = true },
+    { "glepnir/lspsaga.nvim", config = true },
     { "windwp/nvim-autopairs", config = true },
     { "windwp/nvim-ts-autotag", config = true },
+
 
     require("plugins.cmp"),
 
@@ -50,6 +51,7 @@ return {
             {
                 "williamboman/mason-lspconfig.nvim",
                 config = function()
+                    require("mason").setup()
                     require("mason-lspconfig").setup()
                     require("mason-lspconfig").setup_handlers {
                         function(server_name)
