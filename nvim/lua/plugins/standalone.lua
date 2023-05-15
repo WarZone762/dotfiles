@@ -96,6 +96,7 @@ return {
                     ["@property"] = { fg = c.vscBlueGreen, bg = "NONE" },
                 },
             })
+            vim.cmd("colorscheme vscode")
         end,
     },
 }
