@@ -30,8 +30,6 @@ exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
 # and nm-applet is a desktop environment-independent system tray GUI for it.
 exec --no-startup-id nm-applet
 
-exec --no-startup-id pasystray
-
 # Use pactl to adjust volume in PulseAudio.
 set $refresh_i3status killall -SIGUSR1 i3status
 
@@ -184,6 +182,19 @@ bar {
         tray_output primary
 }
 
+set $secondary HDMI-1
+
+workspace $ws1 output primary
+workspace $ws2 output primary
+workspace $ws3 output primary
+workspace $ws4 output primary
+workspace $ws5 output primary
+workspace $ws6 output $secondary
+workspace $ws7 output $secondary
+workspace $ws8 output $secondary
+workspace $ws9 output $secondary
+workspace $ws10 output $secondary
+
 smart_borders no_gaps
 
 gaps inner 5px
@@ -191,4 +202,5 @@ gaps outer 5px
 smart_gaps on
 
 exec /usr/lib/polkit-kde-authentication-agent-1
+# exec xscreensaver --no-splash
 
