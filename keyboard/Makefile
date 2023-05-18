@@ -1,18 +1,22 @@
 KEYBOARD := ktec/ergodone
 KEYMAP := my-keymap
-KEYMAP_PATH := keymaps/${KEYMAP}
+QMK_DIR := ${HOME}/qmk_firmware
 
 SRC := common.c macros.c key_overrides.c tap_dance.c
 SRC := $(addprefix src/,${SRC})
-TARGET := $(subst /,_,${KEYBOARD})_${KEYMAP}.hex
+OUT_DIR := firmware
+TARGET_NAME := $(subst /,_,${KEYBOARD})_${KEYMAP}.hex
+TARGET := ${OUT_DIR}/${TARGET_NAME}
 
-default: ${TARGET} move
+default: ${TARGET}
 
-keymap_generated.c: ${KEYMAP}.json
-	cd ../..; qmk json2c ${KEYMAP_PATH}/${KEYMAP}.json > ${KEYMAP_PATH}/keymap_generated.c
+src/keymap_generated.c: ${KEYMAP}.json
+	qmk json2c ${KEYMAP}.json > src/keymap_generated.c
 
-${TARGET}: keymap.c keymap_generated.c ${SRC}
-	cd ../..; qmk compile -j4 -kb ${KEYBOARD} -km ${KEYMAP}
+${TARGET}: keymap.c src/keymap_generated.c ${SRC}
+	qmk compile -kb ${KEYBOARD} -km ${KEYMAP}
+	mv -v ${QMK_DIR}/${TARGET_NAME} ${TARGET}
 
-move:
-	cd ../..; mv ../../../${TARGET} ${KEYMAP_PATH}/${TARGET}
+flash: ${TARGET}
+	./hid_bootloader_cli -w -v -mmcu=atmega32u4 ${TARGET}
+
