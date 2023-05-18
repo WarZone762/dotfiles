@@ -202,5 +202,5 @@ gaps outer 5px
 smart_gaps on
 
 exec /usr/lib/polkit-kde-authentication-agent-1
-# exec xscreensaver --no-splash
+exec xscreensaver --no-splash
 
