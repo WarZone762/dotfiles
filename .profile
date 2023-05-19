@@ -1,9 +1,9 @@
-DOTFILE_DIR=~/dotfiles
+export DOTFILES_DIR=$HOME/dotfiles
 
 export SHELL=/bin/zsh
 export EDITOR=nvim
-export VISUAL=code
-export HISTFILE=$DOTFILE_DIR/.histfile
+export VISUAL=nvim
+export HISTFILE=$DOTFILES_DIR/.histfile
 
-export ZDOTDIR=$DOTFILE_DIR/zsh
+export ZDOTDIR=$DOTFILES_DIR/zsh
  
