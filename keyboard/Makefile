@@ -2,7 +2,7 @@ KEYBOARD := ktec/ergodone
 KEYMAP := my-keymap
 QMK_DIR := ${HOME}/qmk_firmware
 
-SRC := common.c macros.c key_overrides.c tap_dance.c
+SRC := common.c macros.c key_overrides.c
 SRC := $(addprefix src/,${SRC})
 OUT_DIR := firmware
 TARGET_NAME := $(subst /,_,${KEYBOARD})_${KEYMAP}.hex
