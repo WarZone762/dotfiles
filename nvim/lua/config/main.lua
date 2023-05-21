@@ -1,6 +1,7 @@
 local cmd = vim.cmd
 local env = vim.env
 local fn = vim.fn
+local g = vim.g
 local keymap = vim.keymap
 local opt = vim.opt
 
@@ -35,21 +36,19 @@ if fn.has("unix") then
     opt.backupdir = "/tmp"
     opt.undodir = "/tmp"
 else
-    opt.directory = env.TMP or opt.directory
-    opt.backupdir = env.TMP or opt.backupdir
-    opt.undodir = env.TMP or opt.undodir
+    opt.directory = env.TMP or env.TEMP or opt.directory
+    opt.backupdir = env.TMP or env.TEMP or opt.backupdir
+    opt.undodir = env.TMP or env.TEMP or opt.undodir
+
+    opt.shell = "powershell"
+    opt.shellcmdflag = "-Command"
+    opt.shellquote = ""
+    opt.shellxquote = ""
 end
 
-if env.ComSpec then
-    if string.find(env.ComSpec, "cmd.exe") then
-        opt.shell = "powershell"
-        opt.shellcmdflag = "-Command"
-        opt.shellquote = ""
-        opt.shellxquote = ""
-    end
-end
+vim.g.mapleader = " "
 
-if vim.g.vscode then
+if g.vscode then
     keymap.set({ "n", "o", "x" }, "gc", "<Plug>VSCodeCommentary", {})
     keymap.set("n", "gcc", "<Plug>VSCodeCommentaryLine", {})
 end

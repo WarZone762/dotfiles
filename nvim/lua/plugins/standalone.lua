@@ -32,7 +32,7 @@ return {
     { "windwp/nvim-ts-autotag", config = true },
 
 
-    require("plugins.cmp"),
+    require("plugins.lsp"),
 
     {
         "nvim-treesitter/nvim-treesitter",
