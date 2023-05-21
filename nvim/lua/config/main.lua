@@ -5,9 +5,6 @@ local g = vim.g
 local keymap = vim.keymap
 local opt = vim.opt
 
-opt.splitright = true
-opt.splitbelow = true
-
 opt.number = true
 opt.relativenumber = true
 opt.signcolumn = "yes"
@@ -17,14 +14,19 @@ opt.completeopt = { "menu", "menuone", "longest", "preview", "noselect" }
 
 opt.mouse = "a"
 cmd("filetype plugin indent on")
+
 opt.expandtab = true
 opt.tabstop = 4
+opt.softtabstop = 4
 opt.shiftwidth = 4
 
+opt.smartindent = true
 opt.breakindent = true
 
 opt.ignorecase = true
 opt.smartcase = true
+
+opt.scrolloff = 8
 
 opt.termguicolors = true
 
