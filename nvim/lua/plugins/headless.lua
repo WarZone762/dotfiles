@@ -1,8 +1,9 @@
+local keymap = vim.keymap
+
 return {
     -- Vim
     "godlygeek/tabular",
     "jeetsukumaran/vim-indentwise",
-    "matze/vim-move",
     "michaeljsmith/vim-indent-object",
     "terryma/vim-expand-region",
     "tpope/vim-abolish",
@@ -17,6 +18,13 @@ return {
             "kana/vim-textobj-entire",
             "kana/vim-textobj-line",
         },
+    },
+    {
+        "matze/vim-move",
+        init = function()
+            vim.g.move_key_modifier = "C-M"
+            vim.g.move_key_modifier_visualmode = "C-M"
+        end
     },
 
     -- Neovim

@@ -1,4 +1,2 @@
-require("config.main")
-
-require("plugins.main")
-require("config.plugins")
+require("config")
+require("plugins")

@@ -1,3 +1,4 @@
+local api = vim.api
 local cmd = vim.cmd
 local env = vim.env
 local fn = vim.fn
@@ -34,9 +35,9 @@ opt.backup = true
 opt.undofile = true
 
 if fn.has("unix") then
-    opt.directory = "/tmp"
-    opt.backupdir = "/tmp"
-    opt.undodir = "/tmp"
+    opt.directory = "/tmp/nvim"
+    opt.backupdir = "/tmp/nvim"
+    opt.undodir = "/tmp/nvim"
 else
     opt.directory = env.TMP or env.TEMP or opt.directory
     opt.backupdir = env.TMP or env.TEMP or opt.backupdir
@@ -48,7 +49,38 @@ else
     opt.shellxquote = ""
 end
 
-vim.g.mapleader = " "
+g.mapleader = " "
+
+keymap.set({ "n", "v" }, "<leader>y", [["+y]])
+keymap.set("n", "<leader>Y", [["+Y]])
+keymap.set({ "n", "v" }, "<leader>p", [["+p]])
+keymap.set("n", "<leader>P", [["+P]])
+
+keymap.set("n", "<C-k>", "<cmd>cnext<CR>")
+keymap.set("n", "<C-j>", "<cmd>cprev<CR>")
+keymap.set("n", "<leader>k", "<cmd>lnext<CR>")
+keymap.set("n", "<leader>j", "<cmd>lprev<CR>")
+
+api.nvim_create_autocmd("TextYankPost", {
+    pattern = "*",
+    callback = function()
+        vim.highlight.on_yank({
+            higroup = "IncSearch",
+            timeout = 40,
+        })
+    end,
+})
+
+-- save without formatting
+vim.api.nvim_create_user_command("Wnf", "noautocmd w", {})
+
+api.nvim_create_autocmd("BufWritePre", {
+    pattern = "*",
+    callback = function()
+        cmd([[%s/\s\+$//e]])
+        vim.lsp.buf.format()
+    end
+})
 
 if g.vscode then
     keymap.set({ "n", "o", "x" }, "gc", "<Plug>VSCodeCommentary", {})
