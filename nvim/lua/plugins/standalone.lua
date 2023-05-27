@@ -36,7 +36,7 @@ return {
         "nvim-telescope/telescope.nvim",
         config = function()
             local telescope = require("telescope.builtin")
-            keymap.set("n", "<C-f>", telescope.find_files, { noremap = true })
+            keymap.set("n", "<C-p>", telescope.git_files, { noremap = true })
             keymap.set("n", "<C-t>", vim.cmd.Telescope, { noremap = true })
         end
     },
@@ -107,27 +107,20 @@ return {
                 config = function()
                     require("mason").setup()
                     require("mason-lspconfig").setup()
+
+                    local capabilities = require("cmp_nvim_lsp").default_capabilities()
+
                     require("mason-lspconfig").setup_handlers {
                         function(server_name)
-                            require("lspconfig")[server_name].setup {}
+                            require("lspconfig")[server_name].setup {
+                                capabilities = capabilities,
+                            }
                         end,
                     }
                 end,
             },
         },
         config = true,
-    },
-
-    {
-        "p00f/nvim-ts-rainbow",
-        config = function()
-            require("nvim-treesitter.configs").setup({
-                rainbow = {
-                    enable = true,
-                    extended_mode = true,
-                },
-            })
-        end,
     },
 
     {
