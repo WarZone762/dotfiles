@@ -94,7 +94,7 @@ return {
             })
         end,
         build = function()
-            local ts_update = require('nvim-treesitter.install').update({ with_sync = true })
+            local ts_update = require("nvim-treesitter.install").update({ with_sync = true })
             ts_update()
         end,
     },
@@ -136,16 +136,29 @@ return {
     },
 
     {
-        "Mofiqul/vscode.nvim",
+        "rose-pine/neovim",
         config = function()
-            local c = require("vscode.colors").get_colors()
-            require("vscode").setup({
-                group_overrides = {
-                    ["@field"] = { fg = c.vscBlueGreen, bg = "NONE" },
-                    ["@property"] = { fg = c.vscBlueGreen, bg = "NONE" },
-                },
+            require("rose-pine").setup({
+                disable_background = true
             })
-            vim.cmd("colorscheme vscode")
-        end,
+            vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
+            vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
+
+            vim.cmd.colorscheme("rose-pine")
+        end
     },
+
+    -- {
+    --     "Mofiqul/vscode.nvim",
+    --     config = function()
+    --         local c = require("vscode.colors").get_colors()
+    --         require("vscode").setup({
+    --             group_overrides = {
+    --                 ["@field"] = { fg = c.vscBlueGreen, bg = "NONE" },
+    --                 ["@property"] = { fg = c.vscBlueGreen, bg = "NONE" },
+    --             },
+    --         })
+    --         vim.cmd("colorscheme vscode")
+    --     end,
+    -- },
 }
