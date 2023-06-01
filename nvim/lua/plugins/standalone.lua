@@ -20,15 +20,12 @@ return {
     "nvim-treesitter/nvim-treesitter-context",
 
     { "akinsho/bufferline.nvim",             config = true },
-    { "glepnir/lspsaga.nvim",                config = true },
     { "lewis6991/gitsigns.nvim",             config = true },
     { "lukas-reineke/indent-blankline.nvim", config = true },
     { "numToStr/Comment.nvim",               config = true },
     { "nvim-lualine/lualine.nvim",           config = true },
     { "ray-x/lsp_signature.nvim",            config = true },
     { "stevearc/overseer.nvim",              config = true },
-    { "windwp/nvim-autopairs",               config = true },
-    { "windwp/nvim-ts-autotag",              config = true },
 
     require("plugins.lsp"),
 
@@ -54,7 +51,10 @@ return {
     {
         "folke/trouble.nvim",
         config = function()
-            keymap.set("n", "<leader>d", "<cmd>TroubleToggle quickfix<cr>",
+            keymap.set("n", "<leader>d", "<cmd>TroubleToggle workspace_diagnostics<cr>",
+                { silent = true, noremap = true }
+            )
+            keymap.set("n", "<leader>q", "<cmd>TroubleToggle quickfix<cr>",
                 { silent = true, noremap = true }
             )
         end
@@ -136,29 +136,13 @@ return {
     },
 
     {
-        "rose-pine/neovim",
+        "folke/tokyonight.nvim",
+        priority = 1000,
         config = function()
-            require("rose-pine").setup({
-                disable_background = true
+            require("tokyonight").setup({
+                transparent = true,
             })
-            vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
-            vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
-
-            vim.cmd.colorscheme("rose-pine")
+            vim.cmd.colorscheme("tokyonight-night")
         end
     },
-
-    -- {
-    --     "Mofiqul/vscode.nvim",
-    --     config = function()
-    --         local c = require("vscode.colors").get_colors()
-    --         require("vscode").setup({
-    --             group_overrides = {
-    --                 ["@field"] = { fg = c.vscBlueGreen, bg = "NONE" },
-    --                 ["@property"] = { fg = c.vscBlueGreen, bg = "NONE" },
-    --             },
-    --         })
-    --         vim.cmd("colorscheme vscode")
-    --     end,
-    -- },
 }
