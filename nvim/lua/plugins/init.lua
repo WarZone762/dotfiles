@@ -19,6 +19,7 @@ opt.rtp:prepend(lazypath)
 -- Plugins
 ---@type table<integer, string | table>
 local plugins = {}
+IS_STANDALONE = fn.exists("g:vscode") == 0
 
 for _, v in pairs(require("plugins.headless")) do
     table.insert(plugins, v)
@@ -29,7 +30,7 @@ for _, v in pairs(require("plugins.standalone")) do
         v = { v }
     end
     v.cond = function()
-        return fn.exists("g:vscode") == 0
+        return IS_STANDALONE
     end
 
     table.insert(plugins, v);

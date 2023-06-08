@@ -1,39 +1,53 @@
-local keymap = vim.keymap
+local api = vim.api
 
 return {
     -- Vim
-    "godlygeek/tabular",
-    "jeetsukumaran/vim-indentwise",
-    "michaeljsmith/vim-indent-object",
     "terryma/vim-expand-region",
     "tpope/vim-abolish",
     "tpope/vim-repeat",
-    "tpope/vim-unimpaired",
     "unblevable/quick-scope",
-    "wellle/targets.vim",
-
-    {
-        "kana/vim-textobj-user",
-        dependencies = {
-            "kana/vim-textobj-entire",
-            "kana/vim-textobj-line",
-        },
-    },
-    {
-        "matze/vim-move",
-        init = function()
-            vim.g.move_key_modifier = "C-M"
-            vim.g.move_key_modifier_visualmode = "C-M"
-        end
-    },
 
     -- Neovim
-    { "kylechui/nvim-surround", config = true },
-
+    { "numToStr/Comment.nvim", config = true },
     {
-        "ggandor/leap.nvim",
+        "echasnovski/mini.nvim",
         config = function()
-            require("leap").add_default_mappings()
-        end,
+            require("mini.ai").setup()
+            require("mini.align").setup()
+            require("mini.basics").setup()
+            require("mini.bracketed").setup()
+            require("mini.cursorword").setup()
+            require("mini.hipatterns").setup()
+            if IS_STANDALONE then
+                require("mini.indentscope").setup()
+            end
+            require("mini.jump").setup()
+            require("mini.jump2d").setup()
+            require("mini.move").setup({
+                mappings = {
+                    left = "<C-M-h>",
+                    right = "<C-M-l>",
+                    down = "<C-M-j>",
+                    up = "<C-M-k>",
+
+                    line_left = "<C-M-h>",
+                    line_right = "<C-M-l>",
+                    line_down = "<C-M-j>",
+                    line_up = "<C-M-k>",
+                }
+            })
+            require("mini.pairs").setup()
+            require("mini.splitjoin").setup()
+            require("mini.surround").setup()
+            local trailspace = require("mini.trailspace")
+            trailspace.setup()
+            api.nvim_create_autocmd("BufWritePre", {
+                pattern = "*",
+                callback = function()
+                    trailspace.trim()
+                    trailspace.trim_last_lines()
+                end
+            })
+        end
     },
 }

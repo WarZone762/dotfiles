@@ -6,6 +6,7 @@ if wezterm.config_builder then
     config = wezterm.config_builder()
 end
 
+config.term = "wezterm"
 config.audible_bell = "Disabled"
 config.font = wezterm.font "CaskaydiaCove Nerd Font"
 config.color_scheme = "rose-pine"

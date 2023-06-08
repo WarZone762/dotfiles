@@ -9,9 +9,6 @@ return {
 
     -- Neovim
     "L3MON4D3/LuaSnip",
-    "RRethy/vim-illuminate",
-    "TimUntersberger/neogit",
-    "ggandor/lightspeed.nvim",
     "kyazdani42/nvim-web-devicons",
     "liuchengxu/vista.vim",
     "mfussenegger/nvim-dap",
@@ -22,43 +19,11 @@ return {
     { "akinsho/bufferline.nvim",             config = true },
     { "lewis6991/gitsigns.nvim",             config = true },
     { "lukas-reineke/indent-blankline.nvim", config = true },
-    { "numToStr/Comment.nvim",               config = true },
     { "nvim-lualine/lualine.nvim",           config = true },
     { "ray-x/lsp_signature.nvim",            config = true },
     { "stevearc/overseer.nvim",              config = true },
 
     require("plugins.lsp"),
-
-    {
-        "nvim-telescope/telescope.nvim",
-        config = function()
-            local telescope = require("telescope.builtin")
-            keymap.set("n", "<C-p>", telescope.git_files, { noremap = true })
-            keymap.set("n", "<C-t>", vim.cmd.Telescope, { noremap = true })
-        end
-    },
-
-    {
-        "kyazdani42/nvim-tree.lua",
-        config = function()
-            require("nvim-tree").setup()
-            keymap.set("n", "<leader>f", "<cmd>NvimTreeToggle<cr>",
-                { silent = true, noremap = true }
-            )
-        end
-    },
-
-    {
-        "folke/trouble.nvim",
-        config = function()
-            keymap.set("n", "<leader>d", "<cmd>TroubleToggle workspace_diagnostics<cr>",
-                { silent = true, noremap = true }
-            )
-            keymap.set("n", "<leader>q", "<cmd>TroubleToggle quickfix<cr>",
-                { silent = true, noremap = true }
-            )
-        end
-    },
 
     {
         "ThePrimeagen/harpoon",
@@ -75,28 +40,6 @@ return {
             keymap.set("n", "<leader>(", function() ui.nav_file(4) end)
             keymap.set("n", "<leader>&", function() ui.nav_file(5) end)
         end
-    },
-
-    {
-        "mbbill/undotree",
-        config = function()
-            keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle)
-        end
-    },
-
-    {
-        "nvim-treesitter/nvim-treesitter",
-        config = function()
-            require("nvim-treesitter.configs").setup({
-                ensure_installed = "all",
-                auto_install = true,
-                highlight = { enable = true },
-            })
-        end,
-        build = function()
-            local ts_update = require("nvim-treesitter.install").update({ with_sync = true })
-            ts_update()
-        end,
     },
 
     {
@@ -124,6 +67,31 @@ return {
     },
 
     {
+        "kyazdani42/nvim-tree.lua",
+        config = function()
+            require("nvim-tree").setup()
+            keymap.set("n", "<leader>f", "<cmd>NvimTreeToggle<cr>",
+                { silent = true, noremap = true }
+            )
+        end
+    },
+
+    {
+        "nvim-treesitter/nvim-treesitter",
+        config = function()
+            require("nvim-treesitter.configs").setup({
+                ensure_installed = "all",
+                auto_install = true,
+                highlight = { enable = true },
+            })
+        end,
+        build = function()
+            local ts_update = require("nvim-treesitter.install").update({ with_sync = true })
+            ts_update()
+        end,
+    },
+
+    {
         "jose-elias-alvarez/null-ls.nvim",
         config = function()
             local null_ls = require("null-ls")
@@ -136,6 +104,15 @@ return {
     },
 
     {
+        "nvim-telescope/telescope.nvim",
+        config = function()
+            local telescope = require("telescope.builtin")
+            keymap.set("n", "<C-p>", telescope.git_files, { noremap = true })
+            keymap.set("n", "<C-t>", vim.cmd.Telescope, { noremap = true })
+        end
+    },
+
+    {
         "folke/tokyonight.nvim",
         priority = 1000,
         config = function()
@@ -143,6 +120,25 @@ return {
                 transparent = true,
             })
             vim.cmd.colorscheme("tokyonight-night")
+        end
+    },
+
+    {
+        "folke/trouble.nvim",
+        config = function()
+            keymap.set("n", "<leader>d", "<cmd>TroubleToggle workspace_diagnostics<cr>",
+                { silent = true, noremap = true }
+            )
+            keymap.set("n", "<leader>q", "<cmd>TroubleToggle quickfix<cr>",
+                { silent = true, noremap = true }
+            )
+        end
+    },
+
+    {
+        "mbbill/undotree",
+        config = function()
+            keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle)
         end
     },
 }

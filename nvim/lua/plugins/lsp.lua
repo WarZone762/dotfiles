@@ -26,15 +26,13 @@ return {
     config = function()
         local lsp_zero = require("lsp-zero").preset({})
 
-        lsp_zero.on_attach(function(client, bufnr)
+        lsp_zero.on_attach(function(_, bufnr)
             lsp_zero.default_keymaps({ buffer = bufnr })
         end)
         lsp_zero.setup()
         keymap.set("n", "<leader>s", lsp.buf.signature_help, { noremap = true })
 
         local cmp = require("cmp")
-        local cmp_action = require("lsp-zero").cmp_action()
-
         require("luasnip.loaders.from_vscode").lazy_load()
 
         cmp.setup({
@@ -49,8 +47,8 @@ return {
 
                 ["<C-Space>"] = cmp.mapping.complete(),
 
-                ["<Tab>"] = cmp_action.luasnip_jump_forward(),
-                ["<S-Tab>"] = cmp_action.luasnip_jump_backward(),
+                ["<Tab>"] = nil,
+                ["<S-Tab>"] = nil,
             }
         })
 
