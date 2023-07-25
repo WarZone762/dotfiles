@@ -28,7 +28,7 @@ return {
                             server = {
                                 settings = {
                                     ["rust-analyzer"] = { check = { command = "clippy" } } },
-                            }
+                            },
                         })
                     end,
                 }
@@ -100,7 +100,13 @@ return {
                 ["<C-b>"] = cmp.mapping.scroll_docs(-4),
                 ["<C-f>"] = cmp.mapping.scroll_docs(4),
 
-                ["<CR>"] = cmp.mapping.confirm({ select = false }),
+                ["<CR>"] = cmp.mapping(function(fallback)
+                    if cmp.visible() then
+                        cmp.confirm({ select = false })
+                    else
+                        fallback()
+                    end
+                end),
                 ["<C-Space>"] = cmp.mapping.complete(),
                 ["<C-e>"] = cmp.mapping.abort(),
 

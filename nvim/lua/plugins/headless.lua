@@ -1,4 +1,5 @@
 local api = vim.api
+local keymap = vim.keymap
 
 return {
     -- Vim
@@ -10,6 +11,18 @@ return {
     -- Neovim
     { "numToStr/Comment.nvim", config = true },
     {
+        "ggandor/leap.nvim",
+        config = function()
+            vim.keymap.set({ "n", "x", "o" }, "<CR>", function()
+                local focusable_windows_on_tabpage = vim.tbl_filter(
+                    function(win) return api.nvim_win_get_config(win).focusable end,
+                    api.nvim_tabpage_list_wins(0)
+                )
+                require("leap").leap({ target_windows = focusable_windows_on_tabpage })
+            end)
+        end,
+    },
+    {
         "echasnovski/mini.nvim",
         config = function()
             require("mini.ai").setup()
@@ -18,11 +31,8 @@ return {
             require("mini.bracketed").setup()
             require("mini.cursorword").setup()
             require("mini.hipatterns").setup()
-            if IS_STANDALONE then
-                require("mini.indentscope").setup()
-            end
             require("mini.jump").setup()
-            require("mini.jump2d").setup()
+            -- require("mini.jump2d").setup()
             require("mini.move").setup({
                 mappings = {
                     left = "<C-M-h>",
@@ -34,7 +44,7 @@ return {
                     line_right = "<C-M-l>",
                     line_down = "<C-M-j>",
                     line_up = "<C-M-k>",
-                }
+                },
             })
             require("mini.pairs").setup()
             require("mini.splitjoin").setup()
@@ -46,8 +56,14 @@ return {
                 callback = function()
                     trailspace.trim()
                     trailspace.trim_last_lines()
-                end
+                end,
             })
-        end
+
+            if IS_STANDALONE then
+                require("mini.indentscope").setup()
+                require("mini.files").setup({ options = { use_as_default_explorer = false } })
+                keymap.set("n", "<leader>F", MiniFiles.open, { silent = true, noremap = true })
+            end
+        end,
     },
 }

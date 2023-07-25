@@ -18,7 +18,6 @@ return {
     { "lewis6991/gitsigns.nvim",             config = true },
     { "lukas-reineke/indent-blankline.nvim", config = true },
     { "nvim-lualine/lualine.nvim",           config = true },
-    { "ray-x/lsp_signature.nvim",            config = true },
 
     require("plugins.lsp"),
 
@@ -37,6 +36,26 @@ return {
             keymap.set("n", "<leader>(", function() ui.nav_file(4) end)
             keymap.set("n", "<leader>&", function() ui.nav_file(5) end)
         end,
+    },
+
+    {
+        "folke/noice.nvim",
+        event = "VeryLazy",
+        dependencies = {
+            "MunifTanjim/nui.nvim",
+            "rcarriga/nvim-notify",
+        },
+        opts = {
+            lsp = {
+                -- override markdown rendering so that **cmp** and other plugins use **Treesitter**
+                override = {
+                    ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
+                    ["vim.lsp.util.stylize_markdown"] = true,
+                    ["cmp.entry.get_documentation"] = true,
+                },
+            },
+            presets = { long_message_to_split = true },
+        },
     },
 
     {
