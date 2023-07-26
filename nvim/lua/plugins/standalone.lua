@@ -62,7 +62,10 @@ return {
         "kyazdani42/nvim-tree.lua",
         config = function()
             require("nvim-tree").setup()
-            keymap.set("n", "<leader>f", cmd.NvimTreeToggle,
+            keymap.set(
+                "n",
+                "<leader>f",
+                cmd.NvimTreeToggle,
                 { silent = true, noremap = true }
             )
         end,
@@ -75,6 +78,15 @@ return {
                 ensure_installed = "all",
                 auto_install = true,
                 highlight = { enable = true },
+                incremental_selection = {
+                    enable = true,
+                    keymaps = {
+                        init_selection = "gv",
+                        scope_incremental = "<CR>",
+                        node_incremental = "<TAB>",
+                        node_decremental = "<S-TAB>",
+                    },
+                },
             })
         end,
         build = function()
