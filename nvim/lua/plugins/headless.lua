@@ -19,7 +19,7 @@ return {
                     api.nvim_tabpage_list_wins(0)
                 )
                 require("leap").leap({ target_windows = focusable_windows_on_tabpage })
-            end)
+            end, { desc = "Leap" })
         end,
     },
     {
@@ -29,6 +29,50 @@ return {
             require("mini.align").setup()
             require("mini.basics").setup()
             require("mini.bracketed").setup()
+            local miniclue = require("mini.clue")
+            miniclue.setup({
+                triggers = {
+                    -- Leader triggers
+                    { mode = "n", keys = "<Leader>" },
+                    { mode = "x", keys = "<Leader>" },
+
+                    -- Built-in completion
+                    { mode = "i", keys = "<C-x>" },
+
+                    -- `g` key
+                    { mode = "n", keys = "g" },
+                    { mode = "x", keys = "g" },
+
+                    -- Marks
+                    { mode = "n", keys = "'" },
+                    { mode = "n", keys = "`" },
+                    { mode = "x", keys = "'" },
+                    { mode = "x", keys = "`" },
+
+                    -- Registers
+                    { mode = "n", keys = '"' },
+                    { mode = "x", keys = '"' },
+                    { mode = "i", keys = "<C-r>" },
+                    { mode = "c", keys = "<C-r>" },
+
+                    -- Window commands
+                    { mode = "n", keys = "<C-w>" },
+
+                    -- `z` key
+                    { mode = "n", keys = "z" },
+                    { mode = "x", keys = "z" },
+                },
+
+                clues = {
+                    -- Enhance this by adding descriptions for <Leader> mapping groups
+                    miniclue.gen_clues.builtin_completion(),
+                    miniclue.gen_clues.g(),
+                    miniclue.gen_clues.marks(),
+                    miniclue.gen_clues.registers(),
+                    miniclue.gen_clues.windows(),
+                    miniclue.gen_clues.z(),
+                },
+            })
             require("mini.cursorword").setup()
             require("mini.hipatterns").setup()
             require("mini.jump").setup()
@@ -62,7 +106,8 @@ return {
             if IS_STANDALONE then
                 require("mini.indentscope").setup()
                 require("mini.files").setup({ options = { use_as_default_explorer = false } })
-                keymap.set("n", "<leader>F", MiniFiles.open, { silent = true, noremap = true })
+                keymap.set("n", "<Leader>E", MiniFiles.open,
+                    { silent = true, noremap = true, desc = "MiniFiles toggle" })
             end
         end,
     },

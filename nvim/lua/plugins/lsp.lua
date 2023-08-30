@@ -26,8 +26,17 @@ return {
                     ["rust_analyzer"] = function()
                         require("rust-tools").setup({
                             server = {
+                                capabilities = capabilities,
                                 settings = {
-                                    ["rust-analyzer"] = { check = { command = "clippy" } } },
+                                    ["rust-analyzer"] = {
+                                        check = { command = "clippy" },
+                                        procMacro = {
+                                            ignored = {
+                                                leptos_macro = { "component" },
+                                            },
+                                        },
+                                    },
+                                },
                             },
                         })
                     end,
@@ -48,19 +57,31 @@ return {
                     function() lsp.buf.format({ async = true }) end,
                     { noremap = true }
                 )
-                keymap.set("n", "gd", lsp.buf.definition, { noremap = true })
-                keymap.set("n", "gD", lsp.buf.declaration, { noremap = true })
-                keymap.set("n", "gi", lsp.buf.implementation, { noremap = true })
-                keymap.set("n", "go", lsp.buf.type_definition, { noremap = true })
-                keymap.set("n", "gr", lsp.buf.references, { noremap = true })
-                keymap.set("n", "gs", lsp.buf.signature_help, { noremap = true })
+                keymap.set("n", "gd", lsp.buf.definition,
+                    { noremap = true, desc = "Go to definition" })
+                keymap.set("n", "gD", lsp.buf.declaration,
+                    { noremap = true, desc = "Go to declaration" })
+                keymap.set("n", "gi", lsp.buf.implementation,
+                    { noremap = true, desc = "Go to implementations" })
+                keymap.set("n", "go", lsp.buf.type_definition,
+                    { noremap = true, desc = "Go to type definition" })
+                keymap.set("n", "gr", lsp.buf.references,
+                    { noremap = true, desc = "Go to references" })
+                keymap.set("n", "gs", lsp.buf.signature_help,
+                    { noremap = true, desc = "Show signature" })
 
-                keymap.set("n", "K", "<cmd>Lspsaga hover_doc<cr>", { noremap = true })
-                keymap.set("n", "gl", "<cmd>Lspsaga show_line_diagnostics<cr>", { noremap = true })
-                keymap.set("n", "]d", "<cmd>Lspsaga diagnostic_jump_next<cr>", { noremap = true })
-                keymap.set("n", "[d", "<cmd>Lspsaga diagnostic_jump_prev<cr>", { noremap = true })
-                keymap.set({ "n", "x" }, "<F4>", "<cmd>Lspsaga code_action<cr>", { noremap = true })
-                keymap.set("n", "<F2>", "<cmd>Lspsaga rename<cr>", { noremap = true })
+                keymap.set("n", "K", "<cmd>Lspsaga hover_doc<cr>",
+                    { noremap = true, desc = "Hover documentation" })
+                keymap.set("n", "gl", "<cmd>Lspsaga show_line_diagnostics<cr>",
+                    { noremap = true, desc = "Show line diagnostics" })
+                keymap.set("n", "[d", "<cmd>Lspsaga diagnostic_jump_prev<cr>",
+                    { noremap = true, desc = "Previous diagnostic" })
+                keymap.set("n", "]d", "<cmd>Lspsaga diagnostic_jump_next<cr>",
+                    { noremap = true, desc = "Next diagnostic" })
+                keymap.set({ "n", "x" }, "<Leader>a", "<cmd>Lspsaga code_action<cr>",
+                    { noremap = true, desc = "Code action" })
+                keymap.set("n", "<Leader>r", "<cmd>Lspsaga rename<cr>",
+                    { noremap = true, desc = "Rename" })
             end,
         },
 
@@ -128,7 +149,7 @@ return {
             }),
             snippet = {
                 expand = function(args)
-                    require("luasnip").lsp_expand(args.body)
+                    luasnip.lsp_expand(args.body)
                 end,
             },
             sources = cmp.config.sources({

@@ -27,15 +27,15 @@ end
 
 g.mapleader = " "
 
-keymap.set({ "n", "v" }, "<leader>y", [["+y]])
-keymap.set("n", "<leader>Y", [["+Y]])
-keymap.set({ "n", "v" }, "<leader>p", [["+p]])
-keymap.set("n", "<leader>P", [["+P]])
+keymap.set({ "n", "v" }, "<leader>y", [["+y]], { desc = "Yank to clipboard" })
+keymap.set("n", "<leader>Y", [["+Y]], { desc = "Yank until EOL to clipboard" })
+keymap.set({ "n", "v" }, "<leader>p", [["+p]], { desc = "Paste from clipboard" })
+keymap.set("n", "<leader>P", [["+P]], { desc = "Paste before from clipboard" })
 
-keymap.set("n", "<C-k>", "<cmd>cnext<CR>")
-keymap.set("n", "<C-j>", "<cmd>cprev<CR>")
-keymap.set("n", "<leader>k", "<cmd>lnext<CR>")
-keymap.set("n", "<leader>j", "<cmd>lprev<CR>")
+keymap.set("n", "<C-k>", "<cmd>cnext<CR>", { desc = "Previous quickfix item" })
+keymap.set("n", "<C-j>", "<cmd>cprev<CR>", { desc = "Next quickfix item" })
+keymap.set("n", "<leader>k", "<cmd>lnext<CR>", { desc = "Previous location list item" })
+keymap.set("n", "<leader>j", "<cmd>lprev<CR>", { desc = "Next location list item" })
 
 api.nvim_create_user_command("WriteWithoutFormatting", "noautocmd w", {})
 api.nvim_create_user_command("Wwf", "noautocmd w", {})
@@ -44,5 +44,5 @@ api.nvim_create_autocmd("BufWritePre", {
     pattern = "*",
     callback = function()
         lsp.buf.format()
-    end
+    end,
 })

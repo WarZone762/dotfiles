@@ -27,14 +27,19 @@ return {
             local mark = require("harpoon.mark")
             local ui = require("harpoon.ui")
 
-            keymap.set("n", "<leader>m", mark.add_file)
-            keymap.set("n", "<leader>h", ui.toggle_quick_menu)
+            keymap.set("n", "<Leader>m", mark.add_file, { desc = "Harpoon mark toggle" })
+            keymap.set("n", "<Leader>h", ui.toggle_quick_menu, { desc = "Harpoon toggle" })
 
-            keymap.set("n", "<leader>+", function() ui.nav_file(1) end)
-            keymap.set("n", "<leader>[", function() ui.nav_file(2) end)
-            keymap.set("n", "<leader>{", function() ui.nav_file(3) end)
-            keymap.set("n", "<leader>(", function() ui.nav_file(4) end)
-            keymap.set("n", "<leader>&", function() ui.nav_file(5) end)
+            keymap.set("n", "<Leader>+", function() ui.nav_file(1) end,
+                { desc = "Harpoon go to file 1" })
+            keymap.set("n", "<Leader>[", function() ui.nav_file(2) end,
+                { desc = "Harpoon go to file 2" })
+            keymap.set("n", "<Leader>{", function() ui.nav_file(3) end,
+                { desc = "Harpoon go to file 3" })
+            keymap.set("n", "<Leader>(", function() ui.nav_file(4) end,
+                { desc = "Harpoon go to file 4" })
+            keymap.set("n", "<Leader>&", function() ui.nav_file(5) end,
+                { desc = "Harpoon go to file 5" })
         end,
     },
 
@@ -62,12 +67,8 @@ return {
         "kyazdani42/nvim-tree.lua",
         config = function()
             require("nvim-tree").setup()
-            keymap.set(
-                "n",
-                "<leader>f",
-                cmd.NvimTreeToggle,
-                { silent = true, noremap = true }
-            )
+            keymap.set("n", "<Leader>e", cmd.NvimTreeToggle,
+                { silent = true, noremap = true, desc = "NvimTree toggle" })
         end,
     },
 
@@ -111,8 +112,11 @@ return {
         "nvim-telescope/telescope.nvim",
         config = function()
             local telescope = require("telescope.builtin")
-            keymap.set("n", "<C-p>", telescope.git_files, { noremap = true })
-            keymap.set("n", "<C-t>", cmd.Telescope, { noremap = true })
+            keymap.set("n", "<C-f>", telescope.git_files,
+                { noremap = true, desc = { "Search git files" } })
+            keymap.set("n", "<Leader>f", telescope.find_files,
+                { noremap = true, desc = { "Search files" } })
+            keymap.set("n", "<C-t>", cmd.Telescope, { noremap = true, desc = "Telescope" })
         end,
     },
 
@@ -136,15 +140,15 @@ return {
         config = function()
             keymap.set(
                 "n",
-                "<leader>d",
+                "<Leader>d",
                 "<cmd>TroubleToggle workspace_diagnostics<cr>",
-                { silent = true, noremap = true }
+                { silent = true, noremap = true, desc = "Workspace diagnostics toggle" }
             )
             keymap.set(
                 "n",
-                "<leader>q",
+                "<Leader>q",
                 "<cmd>TroubleToggle quickfix<cr>",
-                { silent = true, noremap = true }
+                { silent = true, noremap = true, desc = "Quickfix toggle" }
             )
         end,
     },
@@ -152,7 +156,7 @@ return {
     {
         "mbbill/undotree",
         config = function()
-            keymap.set("n", "<leader>u", cmd.UndotreeToggle)
+            keymap.set("n", "<Leader>u", cmd.UndotreeToggle, { desc = "Undootree toggle" })
         end,
     },
 }
