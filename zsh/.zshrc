@@ -30,10 +30,14 @@ source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme
 [[ ! -f ~/dotfiles/zsh/.p10k.zsh ]] || source ~/dotfiles/zsh/.p10k.zsh
 
 # User configuration
-alias ls="ls --color=auto"
+if command eza &> /dev/null
+then
+    alias ls="eza --icons"
+else
+    alias ls="ls --color=auto"
+fi
 alias grep="grep --color=auto"
 
 source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 # End of user configuration
-
