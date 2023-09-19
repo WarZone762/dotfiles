@@ -90,7 +90,7 @@ return {
                     line_up = "<C-M-k>",
                 },
             })
-            require("mini.pairs").setup()
+            -- require("mini.pairs").setup()
             require("mini.splitjoin").setup()
             require("mini.surround").setup()
             local trailspace = require("mini.trailspace")

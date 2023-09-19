@@ -35,6 +35,7 @@ return {
                                                 leptos_macro = { "component" },
                                             },
                                         },
+                                        rustc = { source = "discover" },
                                     },
                                 },
                             },

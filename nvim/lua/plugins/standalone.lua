@@ -1,5 +1,10 @@
 local keymap = vim.keymap
+local api = vim.api
 local cmd = vim.cmd
+
+local function hl_set_bg_transparent(name)
+    cmd.highlight(name, "ctermbg=none", "guibg=none")
+end
 
 return {
     -- Vim
@@ -48,7 +53,12 @@ return {
         event = "VeryLazy",
         dependencies = {
             "MunifTanjim/nui.nvim",
-            "rcarriga/nvim-notify",
+            {
+                "rcarriga/nvim-notify",
+                opts = {
+                    background_colour = "#000000",
+                },
+            },
         },
         opts = {
             lsp = {
@@ -121,17 +131,23 @@ return {
     },
 
     {
-        "folke/tokyonight.nvim",
+        "rose-pine/neovim",
         priority = 1000,
+        name = "rose-pine",
         config = function()
-            require("tokyonight").setup({
-                transparent = true,
-                styles = {
-                    sidebars = "transparent",
-                    floats = "transparent",
-                },
+            require("rose-pine").setup({
+                disable_background = true,
             })
-            cmd.colorscheme("tokyonight-night")
+            cmd.colorscheme("rose-pine")
+            hl_set_bg_transparent("NormalFloat")
+            hl_set_bg_transparent("FloatBorder")
+            hl_set_bg_transparent("GitSignsAdd")
+            hl_set_bg_transparent("GitSignsDelete")
+            hl_set_bg_transparent("GitSignsChange")
+            hl_set_bg_transparent("TelescopeNormal")
+            hl_set_bg_transparent("TelescopeNormalFloat")
+            hl_set_bg_transparent("TelescopeBorder")
+            hl_set_bg_transparent("TelescopePromptNormal")
         end,
     },
 
