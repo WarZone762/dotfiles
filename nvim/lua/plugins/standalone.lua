@@ -19,10 +19,9 @@ return {
     "mfussenegger/nvim-dap",
     "nvim-lua/plenary.nvim",
     "nvim-treesitter/nvim-treesitter-context",
-    { "akinsho/bufferline.nvim",             config = true },
-    { "lewis6991/gitsigns.nvim",             config = true },
-    { "lukas-reineke/indent-blankline.nvim", config = true },
-    { "nvim-lualine/lualine.nvim",           config = true },
+    { "akinsho/bufferline.nvim",   config = true },
+    { "lewis6991/gitsigns.nvim",   config = true },
+    { "nvim-lualine/lualine.nvim", config = true },
 
     require("plugins.lsp"),
 

@@ -10,6 +10,7 @@ return {
 
     -- Neovim
     { "numToStr/Comment.nvim", config = true },
+    { "windwp/nvim-autopairs", config = true },
     {
         "ggandor/leap.nvim",
         config = function()

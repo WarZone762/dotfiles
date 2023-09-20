@@ -13,7 +13,7 @@ zstyle ':completion:*' matcher-list '' 'm:{[:lower:]}={[:upper:]}' 'r:|[._-]=* r
 zstyle ':completion:*' menu select=1
 zstyle ':completion:*' select-prompt %SScrolling active: current selection at %p%s
 zstyle ':completion:*' use-compctl false
-zstyle :compinstall filename '/home/user/dotfiles/zsh/.zshrc'
+zstyle :compinstall filename "$ZDOTDIR/.zshrc"
 
 autoload -Uz compinit
 compinit
@@ -26,10 +26,11 @@ bindkey -v
 # End of lines configured by zsh-newuser-install
 
 source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme
-# To customize prompt, run `p10k configure` or edit ~/dotfiles/zsh/.p10k.zsh.
-[[ ! -f ~/dotfiles/zsh/.p10k.zsh ]] || source ~/dotfiles/zsh/.p10k.zsh
+# To customize prompt, run `p10k configure` or edit "$ZDOTDIR/.p10k.zsh".
+[[ ! -f "$ZDOTDIR/.p10k.zsh" ]] || source "$ZDOTDIR/.p10k.zsh"
 
 # User configuration
+alias tmux="tmux -f $TMUX_CONFIG"
 if command eza &> /dev/null
 then
     alias ls="eza --icons"
