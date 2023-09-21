@@ -3,7 +3,7 @@ local api = vim.api
 local cmd = vim.cmd
 
 local function hl_set_bg_transparent(name)
-    cmd.highlight(name, "ctermbg=none", "guibg=none")
+    cmd.highlight(name, "guibg=none")
 end
 
 return {
@@ -138,6 +138,14 @@ return {
                 disable_background = true,
             })
             cmd.colorscheme("rose-pine")
+
+            local old_float = string.format(
+                "#%X",
+                api.nvim_get_hl(0, { name = "NormalFloat" }).bg
+            ) or "none"
+            cmd.highlight("TreesitterContext", "guibg=" .. old_float)
+
+            hl_set_bg_transparent("Normal")
             hl_set_bg_transparent("NormalFloat")
             hl_set_bg_transparent("FloatBorder")
             hl_set_bg_transparent("GitSignsAdd")
