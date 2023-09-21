@@ -30,6 +30,11 @@ source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme
 [[ ! -f "$ZDOTDIR/.p10k.zsh" ]] || source "$ZDOTDIR/.p10k.zsh"
 
 # User configuration
+
+source_if_exists() {
+    [[ ! -f "$1" ]] || source "$1"
+}
+
 alias tmux="tmux -f $TMUX_CONFIG"
 if command eza &> /dev/null
 then
@@ -39,6 +44,8 @@ else
 fi
 alias grep="grep --color=auto"
 
-source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
-source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source_if_exists /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+source_if_exists /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source_if_exists /usr/share/fzf/key-bindings.zsh
+source_if_exists /usr/share/fzf/completion.zsh
 # End of user configuration
