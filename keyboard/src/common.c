@@ -13,11 +13,11 @@ static inline void rx_led_off(void) {
 
 layer_state_t layer_state_set_user(layer_state_t state) {
     switch (get_highest_layer(state)) {
-        case 3:
+        case 4:
             ergodox_board_led_off();
             rx_led_on();
             break;
-        case 4:
+        case 5:
             ergodox_board_led_on();
             rx_led_on();
             break;
