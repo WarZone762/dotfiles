@@ -30,10 +30,11 @@ source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme
 [[ ! -f "$ZDOTDIR/.p10k.zsh" ]] || source "$ZDOTDIR/.p10k.zsh"
 
 # User configuration
-
 source_if_exists() {
     [[ ! -f "$1" ]] || source "$1"
 }
+
+unsetopt beep
 
 alias tmux="tmux -f $TMUX_CONFIG"
 if command eza &> /dev/null

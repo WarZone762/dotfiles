@@ -1,3 +1,5 @@
+#!/bin/env sh
+
 add_to_path() {
     if [ -d "$1" ] && [[ ":$PATH:" != *":$1:"* ]]; then
         PATH="${PATH:+"$PATH:"}$1"
@@ -25,5 +27,6 @@ export ROFI_CONFIG="$DOTFILES/rofi/config.rasi"
 export WEZTERM_CONFIG_FILE="$DOTFILES/.wezterm.lua"
 
 add_to_path $HOME/.cargo/bin
+add_to_path $DOTFILES/bin
 add_to_path $CUSTOM_HOME/bin
 add_to_path $CUSTOM_HOME/opt/bin
