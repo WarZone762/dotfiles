@@ -36,7 +36,7 @@ source_if_exists() {
 
 unsetopt beep
 
-alias tmux="tmux -f $TMUX_CONFIG"
+alias tmux="tmux-with-config"
 if command eza &> /dev/null
 then
     alias ls="eza --icons"

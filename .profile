@@ -6,9 +6,9 @@ add_to_path() {
     fi
 }
 
-export DRIVE1="$HOME/hdd1"
-export CUSTOM_HOME="$DRIVE1/data"
-export DOTFILES="$CUSTOM_HOME/dotfiles"
+export DRIVE1="/hdd1"
+export CUSTOM_HOME="$DRIVE1/user"
+export DOTFILES="$HOME/dotfiles"
 
 export SHELL="/bin/zsh"
 export EDITOR="nvim"
