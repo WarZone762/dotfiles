@@ -27,22 +27,26 @@ return {
 
     {
         "ThePrimeagen/harpoon",
+        branch = "harpoon2",
         config = function()
-            local mark = require("harpoon.mark")
-            local ui = require("harpoon.ui")
+            local harpoon = require("harpoon")
 
-            keymap.set("n", "<Leader>m", mark.add_file, { desc = "Harpoon mark toggle" })
-            keymap.set("n", "<Leader>h", ui.toggle_quick_menu, { desc = "Harpoon toggle" })
+            harpoon:setup()
 
-            keymap.set("n", "<Leader>+", function() ui.nav_file(1) end,
+            keymap.set("n", "<Leader>m", function() harpoon:list():append() end,
+                { desc = "Harpoon append to list" })
+            keymap.set("n", "<Leader>h", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end,
+                { desc = "Harpoon list toggle" })
+
+            keymap.set("n", "<Leader>+", function() harpoon:list():select(1) end,
                 { desc = "Harpoon go to file 1" })
-            keymap.set("n", "<Leader>[", function() ui.nav_file(2) end,
+            keymap.set("n", "<Leader>[", function() harpoon:list():select(2) end,
                 { desc = "Harpoon go to file 2" })
-            keymap.set("n", "<Leader>{", function() ui.nav_file(3) end,
+            keymap.set("n", "<Leader>{", function() harpoon:list():select(3) end,
                 { desc = "Harpoon go to file 3" })
-            keymap.set("n", "<Leader>(", function() ui.nav_file(4) end,
+            keymap.set("n", "<Leader>(", function() harpoon:list():select(4) end,
                 { desc = "Harpoon go to file 4" })
-            keymap.set("n", "<Leader>&", function() ui.nav_file(5) end,
+            keymap.set("n", "<Leader>&", function() harpoon:list():select(5) end,
                 { desc = "Harpoon go to file 5" })
         end,
     },
