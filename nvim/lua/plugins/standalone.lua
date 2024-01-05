@@ -1,10 +1,5 @@
 local keymap = vim.keymap
-local api = vim.api
 local cmd = vim.cmd
-
-local function hl_set_bg_transparent(name)
-    cmd.highlight(name, "guibg=none")
-end
 
 return {
     -- Vim
@@ -122,31 +117,25 @@ return {
     },
 
     {
-        "rose-pine/neovim",
+        "catppuccin/nvim",
+        name = "catppuccin",
         priority = 1000,
-        name = "rose-pine",
         config = function()
-            require("rose-pine").setup({
-                disable_background = true,
+            require("catppuccin").setup({
+                transparent_background = true,
+                integrations = {
+                    native_lsp = {
+                        enabled = true,
+                        underlines = {
+                            errors = { "undercurl" },
+                            hints = { "undercurl" },
+                            warnings = { "undercurl" },
+                            information = { "undercurl" },
+                        },
+                    },
+                },
             })
-            cmd.colorscheme("rose-pine")
-
-            local old_float = string.format(
-                "#%X",
-                api.nvim_get_hl(0, { name = "NormalFloat" }).bg
-            ) or "none"
-            cmd.highlight("TreesitterContext", "guibg=" .. old_float)
-
-            hl_set_bg_transparent("Normal")
-            hl_set_bg_transparent("NormalFloat")
-            hl_set_bg_transparent("FloatBorder")
-            hl_set_bg_transparent("GitSignsAdd")
-            hl_set_bg_transparent("GitSignsDelete")
-            hl_set_bg_transparent("GitSignsChange")
-            hl_set_bg_transparent("TelescopeNormal")
-            hl_set_bg_transparent("TelescopeNormalFloat")
-            hl_set_bg_transparent("TelescopeBorder")
-            hl_set_bg_transparent("TelescopePromptNormal")
+            cmd.colorscheme("catppuccin-mocha")
         end,
     },
 
