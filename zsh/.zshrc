@@ -34,12 +34,13 @@ source_if_exists() {
     [[ ! -f "$1" ]] || source "$1"
 }
 
+export HISTFILE="$DOTFILES/.histfile"
+
 unsetopt beep
 
-alias tmux="tmux-with-config"
 if command eza &> /dev/null
 then
-    alias ls="eza --icons"
+    alias ls="eza --icons=always"
 else
     alias ls="ls --color=auto"
 fi
