@@ -19,7 +19,19 @@ return {
     { "nvim-lualine/lualine.nvim", config = true },
 
     require("plugins.lsp"),
-
+    {
+        "stevearc/conform.nvim",
+        opts = {
+            formatters_by_ft = {
+                javascript = { "prettier" },
+                typescript = { "prettier" },
+            },
+            format_on_save = {
+                timeout_ms = 3000,
+                lsp_fallback = true,
+            }
+        },
+    },
     {
         "ThePrimeagen/harpoon",
         branch = "harpoon2",
@@ -109,9 +121,9 @@ return {
         config = function()
             local telescope = require("telescope.builtin")
             keymap.set("n", "<C-f>", telescope.git_files,
-                { noremap = true, desc = { "Search git files" } })
+                { noremap = true, desc = "Search git files" })
             keymap.set("n", "<Leader>f", telescope.find_files,
-                { noremap = true, desc = { "Search files" } })
+                { noremap = true, desc = "Search files" })
             keymap.set("n", "<C-t>", cmd.Telescope, { noremap = true, desc = "Telescope" })
         end,
     },
@@ -162,5 +174,15 @@ return {
         config = function()
             keymap.set("n", "<Leader>u", cmd.UndotreeToggle, { desc = "Undootree toggle" })
         end,
+    },
+    {
+        "folke/which-key.nvim",
+        event = "VeryLazy",
+        init = function()
+            vim.o.timeout = true
+            vim.o.timeoutlen = 300
+        end,
+        config = true,
+        -- opt = {},
     },
 }

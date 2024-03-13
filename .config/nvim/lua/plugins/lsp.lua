@@ -10,12 +10,17 @@ return {
                 "neovim/nvim-lspconfig",
                 "simrat39/rust-tools.nvim",
                 "williamboman/mason-lspconfig.nvim",
+                "camilledejoye/nvim-lsp-selection-range",
             },
             config = function()
                 require("mason").setup()
                 require("mason-lspconfig").setup()
+                local lsp_selection_range = require("lsp-selection-range")
 
                 local capabilities = require("cmp_nvim_lsp").default_capabilities()
+                lsp_selection_range.update_capabilities(capabilities)
+                keymap.set("n", "vv", lsp_selection_range.trigger, { noremap = true, desc = "Trigger selection" })
+                keymap.set("v", "vv", lsp_selection_range.expand, { noremap = true, desc = "Expand selection" })
 
                 require("mason-lspconfig").setup_handlers {
                     function(server_name)

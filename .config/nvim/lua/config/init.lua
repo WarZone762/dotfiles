@@ -39,10 +39,3 @@ keymap.set("n", "<leader>j", "<cmd>lprev<CR>", { desc = "Next location list item
 
 api.nvim_create_user_command("WriteWithoutFormatting", "noautocmd w", {})
 api.nvim_create_user_command("Wwf", "noautocmd w", {})
-
-api.nvim_create_autocmd("BufWritePre", {
-    pattern = "*",
-    callback = function()
-        lsp.buf.format()
-    end,
-})
