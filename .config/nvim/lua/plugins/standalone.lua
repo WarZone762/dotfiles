@@ -27,7 +27,7 @@ return {
                 typescript = { "prettier" },
             },
             format_on_save = {
-                timeout_ms = 3000,
+                timeout_ms = 10000,
                 lsp_fallback = true,
             }
         },
@@ -90,6 +90,12 @@ return {
             keymap.set("n", "<Leader>e", cmd.NvimTreeToggle,
                 { silent = true, noremap = true, desc = "NvimTree toggle" })
         end,
+    },
+
+    {
+        "stevearc/oil.nvim",
+        config = true,
+        dependencies = { "nvim-tree/nvim-web-devicons" },
     },
 
     {
