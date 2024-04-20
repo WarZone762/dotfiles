@@ -14,6 +14,7 @@ export XDG_CONFIG_HOME="$HOME/.config"
 export SHELL="/bin/zsh"
 export EDITOR="nvim"
 export VISUAL="nvim"
+export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/gcr/ssh"
 
 export ZDOTDIR="$DOTFILES/zsh"
 

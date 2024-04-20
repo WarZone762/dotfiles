@@ -34,6 +34,16 @@ source_if_exists() {
     [[ ! -f "$1" ]] || source "$1"
 }
 
+tmux-ses() {
+    local name=$(tmuxinator list --newline | tail -n+2 | fzf)
+    [[ ! "$name" ]] && return 1
+    tmuxinator ${1:-start} "$name" && exit
+}
+
+tmux-exit() {
+    tmuxinator stop $(tmux display-message -p "#S")
+}
+
 export HISTFILE="$DOTFILES/.histfile"
 
 unsetopt beep
