@@ -19,6 +19,36 @@ return {
     { "nvim-lualine/lualine.nvim", config = true },
 
     require("plugins.lsp"),
+
+    {
+        "ray-x/go.nvim",
+        dependencies = {
+            "neovim/nvim-lspconfig",
+            "nvim-treesitter/nvim-treesitter",
+        },
+        config = function()
+            require("go").setup({
+                goimports = "golines",
+                max_line_len = 100,
+                lsp_cfg = false,
+            })
+            local cfg = require("go.lsp").config()
+            require("lspconfig").gopls.setup(cfg)
+
+            local format_sync_grp = vim.api.nvim_create_augroup("goimports", {})
+            vim.api.nvim_create_autocmd("BufWritePre", {
+                pattern = "*.go",
+                callback = function()
+                    require("go.format").goimports()
+                end,
+                group = format_sync_grp,
+            })
+        end,
+        event = { "CmdlineEnter" },
+        ft = { "go", "gomod" },
+        build = ":lua require('go.install').update_all_sync()", -- if you need to install/update all binaries
+    },
+
     {
         "stevearc/conform.nvim",
         opts = {
@@ -29,7 +59,7 @@ return {
             format_on_save = {
                 timeout_ms = 10000,
                 lsp_fallback = true,
-            }
+            },
         },
     },
     {
@@ -40,7 +70,7 @@ return {
 
             harpoon:setup()
 
-            keymap.set("n", "<Leader>m", function() harpoon:list():append() end,
+            keymap.set("n", "<Leader>m", function() harpoon:list():add() end,
                 { desc = "Harpoon append to list" })
             keymap.set("n", "<Leader>h", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end,
                 { desc = "Harpoon list toggle" })
@@ -131,6 +161,10 @@ return {
             keymap.set("n", "<Leader>f", telescope.find_files,
                 { noremap = true, desc = "Search files" })
             keymap.set("n", "<C-t>", cmd.Telescope, { noremap = true, desc = "Telescope" })
+
+            require("telescope").setup({
+                pickers = { find_files = { hidden = true } },
+            })
         end,
     },
 
