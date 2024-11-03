@@ -7,7 +7,8 @@ add_to_path() {
 }
 
 export HDD1="/hdd1"
-export CUSTOM_HOME="$HDD1/user"
+export SSD1="/ssd1"
+export CUSTOM_HOME="$SSD1/user"
 export DOTFILES="$HOME/dotfiles"
 export XDG_CONFIG_HOME="$HOME/.config"
 

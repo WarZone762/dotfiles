@@ -44,9 +44,8 @@ return {
                 group = format_sync_grp,
             })
         end,
-        event = { "CmdlineEnter" },
         ft = { "go", "gomod" },
-        build = ":lua require('go.install').update_all_sync()", -- if you need to install/update all binaries
+        build = ":lua require('go.install').update_all_sync()",
     },
 
     {
@@ -193,20 +192,20 @@ return {
 
     {
         "folke/trouble.nvim",
-        config = function()
-            keymap.set(
-                "n",
+        opts = {},
+        cmd = "Trouble",
+        keys = {
+            {
                 "<Leader>d",
-                "<cmd>TroubleToggle workspace_diagnostics<cr>",
-                { silent = true, noremap = true, desc = "Workspace diagnostics toggle" }
-            )
-            keymap.set(
-                "n",
+                "<cmd>Trouble diagnostics toggle<cr>",
+                desc = "Diagnostics (Trouble)",
+            },
+            {
                 "<Leader>q",
-                "<cmd>TroubleToggle quickfix<cr>",
-                { silent = true, noremap = true, desc = "Quickfix toggle" }
-            )
-        end,
+                "<cmd>Trouble qflist toggle<cr>",
+                desc = "Quickfix List (Trouble)",
+            },
+        },
     },
 
     {

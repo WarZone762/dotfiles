@@ -7,6 +7,7 @@ if wezterm.config_builder then
 end
 
 config.default_prog = { "tmux" }
+config.front_end = "WebGpu"
 config.term = "wezterm"
 config.audible_bell = "Disabled"
 config.font = wezterm.font "CaskaydiaCove Nerd Font"
@@ -17,7 +18,7 @@ config.background = {
         source = {
             File = os.getenv("XDG_CONFIG_HOME") .. "/wezterm" .. "/rcw-106.jpg",
         },
-        opacity = 0.125,
+        opacity = 0.025,
     },
 }
 
