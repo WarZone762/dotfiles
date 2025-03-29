@@ -6,7 +6,6 @@ add_to_path() {
     fi
 }
 
-export HDD1="/hdd1"
 export SSD1="/ssd1"
 export CUSTOM_HOME="$SSD1/user"
 export DOTFILES="$HOME/dotfiles"

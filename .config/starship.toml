@@ -1,0 +1,19 @@
+"$schema" = 'https://starship.rs/config-schema.json'
+
+add_newline = false
+
+[line_break]
+disabled = true
+
+[git_status]
+diverged = '[⇕](yellow)[⇡${ahead_count}](green)[⇣${behind_count}](red)'
+conflicted = "[=${count}](bright-red)"
+ahead = '[⇡${count}](green)'
+behind = '[⇣${count}](red)'
+untracked = "[?${count}](blue)"
+stashed = "[\\$${count}](purple)"
+modified = "[!${count}](yellow)"
+staged = "[+${count}](green)"
+renamed = "[»${count}](cyan)"
+deleted = "[✘${count}](red)"
+style = ""
