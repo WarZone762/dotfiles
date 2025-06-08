@@ -8,7 +8,7 @@ return {
             "williamboman/mason.nvim",
             dependencies = {
                 "neovim/nvim-lspconfig",
-                "simrat39/rust-tools.nvim",
+                "mrcjkb/rustaceanvim",
                 "williamboman/mason-lspconfig.nvim",
                 "camilledejoye/nvim-lsp-selection-range",
             },
@@ -24,31 +24,21 @@ return {
                 keymap.set("v", "vv", lsp_selection_range.expand,
                     { noremap = true, desc = "Expand selection" })
 
-                require("mason-lspconfig").setup_handlers {
-                    function(server_name)
-                        require("lspconfig")[server_name].setup({
-                            capabilities = capabilities,
-                        })
-                    end,
-                    ["rust_analyzer"] = function()
-                        require("rust-tools").setup({
-                            server = {
-                                capabilities = capabilities,
-                                settings = {
-                                    ["rust-analyzer"] = {
-                                        check = { command = "clippy" },
-                                        procMacro = {
-                                            ignored = {
-                                                leptos_macro = { "component" },
-                                            },
-                                        },
-                                        rustc = { source = "discover" },
-                                    },
+                vim.lsp.config("*", { capabilities = capabilities })
+                vim.lsp.config("rust-analyzer", {
+                    capabilities = capabilities,
+                    settings = {
+                        ["rust-analyzer"] = {
+                            check = { command = "clippy" },
+                            procMacro = {
+                                ignored = {
+                                    leptos_macro = { "component" },
                                 },
                             },
-                        })
-                    end,
-                }
+                            rustc = { source = "discover" },
+                        },
+                    },
+                })
             end,
             build = function()
                 pcall(vim.cmd.MasonUpdate)
