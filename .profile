@@ -10,6 +10,7 @@ export SSD1="/ssd1"
 export CUSTOM_HOME="$SSD1/user"
 export DOTFILES="$HOME/dotfiles"
 export XDG_CONFIG_HOME="$HOME/.config"
+export XDG_CURRENT_DESKTOP="i3"
 
 export SHELL="/bin/zsh"
 export EDITOR="nvim"
