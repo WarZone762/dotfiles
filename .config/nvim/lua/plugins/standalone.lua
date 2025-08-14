@@ -174,6 +174,9 @@ return {
         config = function()
             require("catppuccin").setup({
                 transparent_background = true,
+                ["float"] = {
+                    transparent = true,
+                },
                 integrations = {
                     native_lsp = {
                         enabled = true,
