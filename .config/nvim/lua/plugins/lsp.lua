@@ -29,6 +29,9 @@ return {
                     capabilities = capabilities,
                     settings = {
                         ["rust-analyzer"] = {
+                            rustfmt = {
+                                extraArgs = { "+nightly" },
+                            },
                             check = { command = "clippy" },
                             procMacro = {
                                 ignored = {
