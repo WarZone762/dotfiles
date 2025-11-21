@@ -6,17 +6,40 @@ return {
     "editorconfig/editorconfig-vim",
     "mg979/vim-visual-multi",
     "tpope/vim-eunuch",
-    "tpope/vim-fugitive",
-
     -- Neovim
     "kyazdani42/nvim-web-devicons",
     "liuchengxu/vista.vim",
     "mfussenegger/nvim-dap",
     "nvim-lua/plenary.nvim",
-    "nvim-treesitter/nvim-treesitter-context",
     { "akinsho/bufferline.nvim",   config = true },
     { "lewis6991/gitsigns.nvim",   config = true },
     { "nvim-lualine/lualine.nvim", config = true },
+    {
+        "nvim-treesitter/nvim-treesitter-context",
+        opts = { max_lines = 5 },
+    },
+    {
+        "tpope/vim-fugitive",
+        config = function()
+            keymap.set(
+                "n",
+                "<leader>g",
+                function()
+                    local wininfo = vim.fn.getwininfo()
+                    local fugitive_win = vim.tbl_filter(
+                        function(x) return x.variables.fugitive_status ~= nil end,
+                        wininfo
+                    )
+                    if #fugitive_win ~= 0 then
+                        vim.cmd(fugitive_win[1].winnr .. "wincmd c")
+                    else
+                        cmd.Git()
+                    end
+                end,
+                { noremap = true, silent = true, desc = "Toggle Git Fugitive" }
+            )
+        end,
+    },
 
     require("plugins.lsp"),
 
