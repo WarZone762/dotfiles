@@ -32,6 +32,8 @@ exec --no-startup-id dex --autostart --environment i3
 # and nm-applet is a desktop environment-independent system tray GUI for it.
 exec --no-startup-id nm-applet
 
+exec --no-startup-id pasystray
+
 # Use pactl to adjust volume in PulseAudio.
 set $refresh_i3status killall -SIGUSR1 i3status
 
@@ -185,7 +187,7 @@ smart_gaps on
 
 focus_follows_mouse no
 
-set $secondary DVI-D-0
+set $secondary HDMI-0
 
 workspace $ws1 output primary
 workspace $ws2 output primary

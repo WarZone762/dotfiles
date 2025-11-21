@@ -6,11 +6,14 @@ add_to_path() {
     fi
 }
 
+export M2_2="/m2.2"
 export SSD1="/ssd1"
-export CUSTOM_HOME="$SSD1/user"
+export SSD2="/ssd2"
+export CUSTOM_HOME="$M2_2/user"
 export DOTFILES="$HOME/dotfiles"
 export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_CURRENT_DESKTOP="i3"
+export QT_QPA_PLATFORMTHEME=gtk2
 
 export SHELL="/bin/zsh"
 export EDITOR="nvim"
